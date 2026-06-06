@@ -1,0 +1,20 @@
+{
+  "name": "Lucas's Bedtime Storybook",
+  "short_name": "Lucas Stories",
+  "description": "A magical AI bedtime storybook for Lucas — a new story every night!",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f0c29",
+  "theme_color": "#302b63",
+  "orientation": "portrait-primary",
+  "categories": ["kids", "education", "entertainment"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

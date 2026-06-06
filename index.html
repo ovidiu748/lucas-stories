@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>✨ Bedtime Storybook</title>
+  <link rel="manifest" href="manifest.json"/>
+  <meta name="theme-color" content="#302b63"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Bedtime Stories"/>
+  <link rel="apple-touch-icon" href="icons/icon.svg"/>
+  <meta name="description" content="Free magical AI bedtime storybook for children."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"/>
+<style>
+:root{--gold:#FFD700;--gold2:#FFA500;--card:rgba(255,255,255,.07);--border:rgba(255,255,255,.14);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px 16px 48px;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(1px 1px at 8% 15%,white,transparent),radial-gradient(1px 1px at 25% 55%,white,transparent),radial-gradient(1px 1px at 45% 8%,white,transparent),radial-gradient(1px 1px at 65% 75%,white,transparent),radial-gradient(1px 1px at 88% 28%,white,transparent),radial-gradient(2px 2px at 38% 68%,rgba(255,255,255,.7),transparent),radial-gradient(2px 2px at 82% 58%,rgba(255,255,255,.7),transparent);pointer-events:none;z-index:0;animation:twinkle 5s infinite alternate;}
+@keyframes twinkle{0%{opacity:.5}100%{opacity:1}}
+.wrap{width:100%;max-width:720px;position:relative;z-index:1;}
+.header{text-align:center;margin-bottom:26px;padding-top:14px;}
+.moon-icon{font-size:54px;display:block;animation:float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.header h1{font-family:'Fredoka One',cursive;font-size:2.2em;color:var(--gold);text-shadow:0 0 24px rgba(255,215,0,.5);margin-top:8px;}
+.header p{color:#b0b8d4;font-size:.92em;margin-top:4px;}
+.free-badge{display:inline-block;margin-top:10px;background:linear-gradient(135deg,#11998e,#38ef7d);color:#0a2a1a;font-size:.75em;font-weight:800;padding:4px 14px;border-radius:20px;letter-spacing:.5px;}
+.card{background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:22px;padding:24px;margin-bottom:16px;}
+.section-label{font-size:.73em;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#a0aec0;margin-bottom:10px;}
+.hero-row{display:flex;align-items:center;gap:10px;background:rgba(255,215,0,.1);border:2px solid rgba(255,215,0,.3);border-radius:13px;padding:11px 15px;margin-bottom:20px;}
+.hero-row input{background:none;border:none;outline:none;font-family:'Fredoka One',cursive;font-size:1.3em;color:var(--gold);width:100%;}
+.pill-group{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.pill{padding:8px 15px;border-radius:50px;border:2px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);color:#d0d8f0;font-size:.85em;font-weight:600;cursor:pointer;transition:all .2s;user-select:none;}
+.pill:hover{border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.11);transform:translateY(-2px);}
+.pill.selected{border-color:transparent;transform:translateY(-2px);}
+.pill[data-value=football].selected{background:linear-gradient(135deg,#11998e,#38ef7d);color:#111;box-shadow:0 4px 14px rgba(56,239,125,.4);}
+.pill[data-value=rugby].selected{background:linear-gradient(135deg,#f7971e,#ffd200);color:#111;}
+.pill[data-value=books].selected{background:linear-gradient(135deg,#8e2de2,#4a00e0);color:#fff;}
+.pill[data-value=adventure].selected{background:linear-gradient(135deg,#f953c6,#b91d73);color:#fff;}
+.pill[data-value=space].selected{background:linear-gradient(135deg,#4776E6,#8E54E9);color:#fff;}
+.pill[data-value=dinos].selected{background:linear-gradient(135deg,#56ab2f,#a8e063);color:#111;}
+.pill[data-value=ocean].selected{background:linear-gradient(135deg,#1a6fe0,#43e8d8);color:#111;}
+.pill[data-value=superhero].selected{background:linear-gradient(135deg,#c0392b,#f7ca18);color:#111;}
+.pill[data-value=castle].selected{background:linear-gradient(135deg,#7b4f12,#e0b85a);color:#111;}
+.pill[data-value=circus].selected{background:linear-gradient(135deg,#e52d27,#b31217);color:#fff;}
+.pill[data-value=fairies].selected{background:linear-gradient(135deg,#ff9a9e,#fad0c4);color:#111;}
+.pill[data-value=forest].selected{background:linear-gradient(135deg,#134e5e,#71b280);color:#fff;}
+.pill[data-value=pirates].selected{background:linear-gradient(135deg,#373b44,#4286f4);color:#fff;}
+.pill[data-value=games].selected{background:linear-gradient(135deg,#6a11cb,#2575fc);color:#fff;}
+.pill[data-value=safari].selected{background:linear-gradient(135deg,#f4a623,#e8804a);color:#111;}
+.pill[data-value=seasons].selected{background:linear-gradient(135deg,#89f7fe,#66a6ff);color:#111;}
+.pill[data-value=exciting].selected{background:linear-gradient(135deg,#f7971e,#ffd200);color:#111;}
+.pill[data-value=funny].selected{background:linear-gradient(135deg,#fc5c7d,#6a3093);color:#fff;}
+.pill[data-value=calm].selected{background:linear-gradient(135deg,#2193b0,#6dd5ed);color:#111;}
+.pill[data-value=magical].selected{background:linear-gradient(135deg,#DA22FF,#9733EE);color:#fff;}
+.pill[data-value=short].selected{background:linear-gradient(135deg,#2193b0,#6dd5ed);color:#111;}
+.pill[data-value=long].selected{background:linear-gradient(135deg,#f953c6,#b91d73);color:#fff;}
+.warning{display:none;background:rgba(255,80,80,.13);border:1px solid rgba(255,80,80,.28);border-radius:12px;padding:12px 16px;color:#ffb3b3;font-size:.84em;margin-bottom:14px;line-height:1.55;}
+.warning.show{display:block;}
+.btn-go{width:100%;padding:17px;border-radius:15px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1a2e;font-family:'Fredoka One',cursive;font-size:1.22em;cursor:pointer;transition:all .3s;box-shadow:0 6px 20px rgba(255,165,0,.4);display:flex;align-items:center;justify-content:center;gap:10px;}
+.btn-go:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(255,165,0,.6);}
+.btn-go:disabled{opacity:.55;cursor:not-allowed;transform:none;}
+#loadScreen{display:none;text-align:center;padding:60px 20px;}
+#loadScreen.show{display:block;}
+.load-moon{font-size:3.5em;display:block;animation:spin-float 2s ease-in-out infinite;}
+@keyframes spin-float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-16px) rotate(18deg)}}
+.load-title{font-family:'Fredoka One',cursive;font-size:1.35em;color:var(--gold);margin-top:16px;}
+.load-sub{color:#8892b0;margin-top:7px;font-size:.92em;line-height:1.65;}
+.prog-bar{width:260px;height:6px;background:rgba(255,255,255,.1);border-radius:10px;margin:18px auto 0;overflow:hidden;}
+.prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:10px;transition:width .5s ease;}
+#bookScreen{display:none;width:100%;}
+#bookScreen.show{display:block;}
+.book-header{text-align:center;margin-bottom:22px;}
+.book-main-title{font-family:'Fredoka One',cursive;font-size:1.9em;color:var(--gold);text-shadow:0 0 20px rgba(255,215,0,.4);}
+.book-sub{color:#b0b8d4;font-size:.88em;margin-top:4px;}
+.page{background:rgba(255,255,255,.055);backdrop-filter:blur(12px);border:1px solid rgba(255,215,0,.17);border-radius:24px;overflow:hidden;margin-bottom:26px;animation:pageIn .55s ease both;}
+.page:nth-child(1){animation-delay:.05s}.page:nth-child(2){animation-delay:.15s}.page:nth-child(3){animation-delay:.25s}.page:nth-child(4){animation-delay:.35s}.page:nth-child(5){animation-delay:.45s}
+@keyframes pageIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.page-illus{width:100%;position:relative;overflow:hidden;}
+.title-page .page-illus{height:340px;}.story-page .page-illus{height:265px;}.end-page .page-illus{height:300px;}
+.page-illus img{width:100%;height:100%;object-fit:cover;display:block;}
+.scene{width:100%;height:100%;position:relative;overflow:hidden;}
+.sky-football{background:linear-gradient(180deg,#87CEEB,#b8e8a0 58%,#3a9e52);}
+.sky-rugby{background:linear-gradient(180deg,#a0d8e8,#8aca88 58%,#2d8a3a);}
+.sky-books{background:linear-gradient(180deg,#0a0520,#1e0d5a 58%,#3520a0);}
+.sky-adventure{background:linear-gradient(180deg,#ff9060,#1e7a50 52%,#0d4a28);}
+.sky-space{background:linear-gradient(180deg,#000308,#010920 52%,#020d38);}
+.sky-dinos{background:linear-gradient(180deg,#a0e880,#3db83d 58%,#1a6a1a);}
+.sky-ocean{background:linear-gradient(180deg,#0077b6,#0096c7 40%,#00b4d8);}
+.sky-superhero{background:linear-gradient(180deg,#1a1a2e,#16213e 50%,#0f3460);}
+.sky-castle{background:linear-gradient(180deg,#614385,#516395 52%,#2c3e6b);}
+.sky-circus{background:linear-gradient(180deg,#f7c59f,#e8a87c 50%,#d4855a);}
+.sky-fairies{background:linear-gradient(180deg,#fbc2eb,#e8a0d0 50%,#c96faf);}
+.sky-forest{background:linear-gradient(180deg,#134e5e,#1a6a4a 52%,#0d4a28);}
+.sky-pirates{background:linear-gradient(180deg,#1a3a5c,#1e4d7a 50%,#2166a0);}
+.sky-games{background:linear-gradient(180deg,#0d001a,#1a0535 50%,#2d0b5e);}
+.sky-safari{background:linear-gradient(180deg,#f4d03f,#e8a830 50%,#c47320);}
+.sky-seasons{background:linear-gradient(180deg,#e0f7ff,#b8ecff 50%,#7ad4f5);}
+.sky-night{background:linear-gradient(180deg,#010310,#050e2a 52%,#0a1540);}
+.s-ground{position:absolute;bottom:0;left:0;right:0;height:62px;border-radius:50% 50% 0 0/22px 22px 0 0;}
+.gnd-green{background:#2a7a35;}.gnd-dark{background:#1a1a50;}.gnd-jungle{background:#1a5a1a;}
+.gnd-space{background:#02061a;}.gnd-night{background:#050d25;}.gnd-ocean{background:#005f8a;}
+.gnd-city{background:#1a1a2e;}.gnd-stone{background:#4a3728;}.gnd-sand{background:#c8a96a;}
+.gnd-pink{background:#c060a0;}.gnd-moss{background:#2d5a1b;}.gnd-deck{background:#4a3010;}
+.gnd-pixel{background:#1a0535;}.gnd-savanna{background:#b8860b;}.gnd-snow{background:#c8e8f8;}
+.s-sky-obj{position:absolute;font-size:2em;animation:sky-d 6s ease-in-out infinite;}
+.s-sky-obj.k1{top:9%;left:7%;font-size:1.8em;}.s-sky-obj.k2{top:7%;right:9%;animation-delay:1s;font-size:2.2em;}
+.s-sky-obj.k3{top:20%;left:30%;animation-delay:2s;font-size:1.5em;}.s-sky-obj.k4{top:14%;right:28%;animation-delay:.5s;font-size:1.9em;}
+@keyframes sky-d{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px) translateX(4px)}}
+.s-mid{position:absolute;bottom:56px;font-size:3em;animation:mid-s 4s ease-in-out infinite;}
+.s-mid.m1{left:4%;}.s-mid.m2{left:13%;animation-delay:.6s;font-size:2.5em;}.s-mid.m3{right:4%;animation-delay:.3s;}.s-mid.m4{right:13%;animation-delay:.9s;font-size:2.5em;}
+@keyframes mid-s{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-5px) rotate(1deg)}}
+.s-hero{position:absolute;bottom:49px;left:50%;transform:translateX(-50%);font-size:5.8em;line-height:1;filter:drop-shadow(0 8px 14px rgba(0,0,0,.4));animation:h-b 2.4s ease-in-out infinite;z-index:5;}
+.title-page .s-hero{font-size:7.2em;bottom:54px;}.end-page .s-hero{font-size:4.8em;animation:breathe 4s ease-in-out infinite;}
+@keyframes h-b{0%,100%{transform:translateX(-50%) translateY(0) rotate(-3deg)}50%{transform:translateX(-50%) translateY(-13px) rotate(3deg)}}
+@keyframes breathe{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.04)}}
+.s-support{position:absolute;bottom:50px;font-size:3.2em;filter:drop-shadow(0 4px 8px rgba(0,0,0,.3));animation:s-bob 3s ease-in-out infinite;}
+.s-support.c1{left:9%;animation-delay:.4s;}.s-support.c2{right:9%;animation-delay:.8s;}
+@keyframes s-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.s-prop{position:absolute;bottom:47px;font-size:2.3em;animation:p-p 3s ease-in-out infinite;z-index:3;}
+.s-prop.p1{left:28%;animation-delay:.2s;}.s-prop.p2{right:28%;animation-delay:.7s;}
+@keyframes p-p{0%,100%{transform:scale(1) rotate(-5deg)}50%{transform:scale(1.12) rotate(5deg)}}
+.s-spark{position:absolute;border-radius:50%;animation:sp 2s ease-in-out infinite;opacity:0;}
+@keyframes sp{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.3)}}
+.page-num-badge{position:absolute;top:11px;right:13px;background:rgba(0,0,0,.45);color:var(--gold);font-family:'Fredoka One',cursive;font-size:.78em;padding:3px 12px;border-radius:20px;z-index:10;}
+.title-overlay{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(0deg,rgba(0,0,0,.75),transparent);z-index:8;}
+.title-overlay h2{font-family:'Fredoka One',cursive;font-size:1.55em;color:var(--gold);line-height:1.2;}
+.title-overlay p{color:rgba(255,255,255,.65);font-size:.8em;margin-top:3px;}
+.page-body{padding:22px 26px 20px;}
+.page-chapter{font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#718096;margin-bottom:9px;}
+.page-text{font-family:'Lora',serif;color:#d8e0f8;font-size:1.06em;line-height:1.92;}
+.page-text.italic{font-style:italic;color:#c4d0f0;}
+.book-controls{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:6px;margin-bottom:28px;}
+.btn-c{padding:10px 20px;border-radius:50px;border:2px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#d0d8f0;font-family:'Nunito',sans-serif;font-weight:700;font-size:.88em;cursor:pointer;transition:all .2s;}
+.btn-c:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4);transform:translateY(-2px);}
+.btn-c.prime{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1a2e;border-color:transparent;box-shadow:0 4px 14px rgba(255,165,0,.35);}
+#installBanner{display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:12px 16px;background:linear-gradient(135deg,#302b63,#0f0c29);border-top:1px solid rgba(255,215,0,.3);box-shadow:0 -4px 20px rgba(0,0,0,.4);}
+#installBanner.show{display:block;}
+#installContent{display:flex;align-items:center;gap:12px;max-width:720px;margin:0 auto;}
+#installContent>div{flex:1;}
+#installBtn{padding:9px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,#FFD700,#FFA500);color:#1a1a2e;font-family:'Fredoka One',cursive;font-size:.95em;cursor:pointer;white-space:nowrap;}
+#dismissInstall{padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#718096;cursor:pointer;font-size:1em;}
+.footer{text-align:center;color:#3a4258;font-size:.76em;padding:10px 0 18px;}
+@media(max-width:500px){.header h1{font-size:1.7em}.card{padding:18px}.pill{font-size:.8em;padding:6px 11px}.page-body{padding:17px 18px}.s-hero{font-size:4.2em}.title-page .s-hero{font-size:5.5em}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div id="setupScreen">
+  <div class="header">
+    <span class="moon-icon">🌙</span>
+    <h1>Bedtime Storybook</h1>
+    <p>A magical illustrated story, every single night ✨</p>
+    <span class="free-badge">🌍 100% Free · No Account Needed</span>
+  </div>
+  <div class="warning" id="warn"></div>
+  <div class="card">
+    <div class="section-label">🦸 Hero Name</div>
+    <div class="hero-row">
+      <span style="font-size:1.6em">⭐</span>
+      <input type="text" id="heroName" value="Lucas" placeholder="Your child's name..." maxlength="30"/>
+    </div>
+    <div class="section-label">🎨 Tonight's Theme</div>
+    <div class="pill-group" id="themePills">
+      <button class="pill selected" data-group="theme" data-value="football">⚽ Football</button>
+      <button class="pill" data-group="theme" data-value="rugby">🏉 Rugby</button>
+      <button class="pill" data-group="theme" data-value="books">📚 Magic Books</button>
+      <button class="pill" data-group="theme" data-value="adventure">🗺️ Adventure</button>
+      <button class="pill" data-group="theme" data-value="space">🚀 Space</button>
+      <button class="pill" data-group="theme" data-value="dinos">🦕 Dinosaurs</button>
+      <button class="pill" data-group="theme" data-value="ocean">🌊 Ocean</button>
+      <button class="pill" data-group="theme" data-value="superhero">⚡ Superheroes</button>
+      <button class="pill" data-group="theme" data-value="castle">🏰 Castles</button>
+      <button class="pill" data-group="theme" data-value="circus">🎪 Circus</button>
+      <button class="pill" data-group="theme" data-value="fairies">🧚 Fairies</button>
+      <button class="pill" data-group="theme" data-value="forest">🍄 Enchanted Forest</button>
+      <button class="pill" data-group="theme" data-value="pirates">🏴☠️ Pirates</button>
+      <button class="pill" data-group="theme" data-value="games">🎮 Video Games</button>
+      <button class="pill" data-group="theme" data-value="safari">🦁 Safari</button>
+      <button class="pill" data-group="theme" data-value="seasons">❄️ Seasons</button>
+    </div>
+    <div class="section-label">💫 Story Mood</div>
+    <div class="pill-group">
+      <button class="pill selected" data-group="mood" data-value="exciting">⚡ Exciting</button>
+      <button class="pill" data-group="mood" data-value="funny">😄 Funny</button>
+      <button class="pill" data-group="mood" data-value="calm">🌊 Calm &amp; Sleepy</button>
+      <button class="pill" data-group="mood" data-value="magical">🔮 Magical</button>
+    </div>
+    <div class="section-label">📄 Pages</div>
+    <div class="pill-group">
+      <button class="pill selected" data-group="len" data-value="short">🌟 3 pages</button>
+      <button class="pill" data-group="len" data-value="long">📖 5 pages</button>
+    </div>
+  </div>
+  <button class="btn-go" id="btnGo" onclick="generate()">
+    <span>📖</span> Create Tonight's Story <span>✨</span>
+  </button>
+</div>
+
+<div id="loadScreen">
+  <span class="load-moon">🌙</span>
+  <div class="load-title" id="loadTitle">Writing the story...</div>
+  <div class="load-sub" id="loadSub">The story fairies are at work! ✨</div>
+  <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+</div>
+
+<div id="bookScreen">
+  <div class="book-header">
+    <div class="book-main-title" id="bookTitle">Bedtime Storybook</div>
+    <div class="book-sub" id="bookSub">Tonight's magical adventure ✨</div>
+  </div>
+  <div id="pages"></div>
+  <div class="book-controls">
+    <button class="btn-c prime" onclick="newStory()">📖 New Story</button>
+    <button class="btn-c" onclick="readBook()">🔊 Read Aloud</button>
+    <button class="btn-c" onclick="stopReading()">⏹ Stop</button>
+    <button class="btn-c" onclick="copyBook()">📋 Copy</button>
+    <button class="btn-c" onclick="backSetup()">⚙️ Settings</button>
+  </div>
+</div>
+
+<div class="footer">Made with ❤️ for children everywhere · Sweet dreams 🌙</div>
+</div>
+
+<div id="installBanner">
+  <div id="installContent">
+    <span style="font-size:2em">📲</span>
+    <div>
+      <div style="font-family:'Fredoka One',cursive;font-size:1.05em;color:#FFD700;">Add to Home Screen!</div>
+      <div style="font-size:.8em;color:#b0b8d4;margin-top:2px;">One tap for a bedtime story every night</div>
+    </div>
+    <button id="installBtn">Install ✨</button>
+    <button id="dismissInstall">✕</button>
+  </div>
+</div>
+
+<script>
+// ── SAFETY: sanitise child name input ──
+document.getElementById('heroName').addEventListener('input', function() {
+  this.value = this.value.replace(/[^a-zA-Z\s'-]/g, '').slice(0, 30);
+});
+
+// ── PILLS ──
+document.querySelectorAll('.pill').forEach(p => {
+  p.addEventListener('click', () => {
+    document.querySelectorAll('.pill[data-group="' + p.dataset.group + '"]').forEach(x => x.classList.remove('selected'));
+    p.classList.add('selected');
+  });
+});
+const sel = g => { const e = document.querySelector('.pill[data-group="' + g + '"].selected'); return e ? e.dataset.value : null; };
+
+// ── SCENES ──
+const SCENES = {
+  football:  {sky:'sky-football', gnd:'gnd-green',  skyE:['☀️','⛅','🌤️','☁️'],   mid:['🌳','🌲','🌳','🌲'],  hero:'🧒', props:['⚽','🥅'], sup:['🧑','👦'], sparks:['#FFD700','#FFF','#38ef7d','#87CEEB']},
+  rugby:     {sky:'sky-rugby',    gnd:'gnd-green',  skyE:['⛅','☀️','🌈','🌤️'],   mid:['🌿','🌳','🌿','🌳'],  hero:'🧒', props:['🏉','🏆'], sup:['🧑','👦'], sparks:['#FFD700','#FFA500','#FFF','#a8e063']},
+  books:     {sky:'sky-books',    gnd:'gnd-dark',   skyE:['🌙','⭐','💫','✨'],    mid:['📚','🕯️','📚','🪄'],  hero:'🧒', props:['📖','✨'], sup:['🦉','🐱'], sparks:['#DA22FF','#9733EE','#FFD700','#fff']},
+  adventure: {sky:'sky-adventure',gnd:'gnd-jungle', skyE:['🌅','🦋','🌟','🌸'],   mid:['🌳','🌴','🌳','🌴'],  hero:'🧒', props:['🗺️','💎'], sup:['🦊','🐰'], sparks:['#f953c6','#FFD700','#38ef7d','#FFF']},
+  space:     {sky:'sky-space',    gnd:'gnd-space',  skyE:['⭐','🌟','💫','🌙'],    mid:['🪐','⭐','🌌','✨'],  hero:'🧒', props:['🚀','🌍'], sup:['👽','🤖'], sparks:['#4776E6','#8E54E9','#FFD700','#fff']},
+  dinos:     {sky:'sky-dinos',    gnd:'gnd-jungle', skyE:['☀️','🌤️','🦋','🌿'],  mid:['🌴','🌿','🌴','🌿'],  hero:'🧒', props:['🦕','🥚'], sup:['🦖','🦕'], sparks:['#56ab2f','#FFD700','#a8e063','#FFF']},
+  ocean:     {sky:'sky-ocean',    gnd:'gnd-ocean',  skyE:['🐬','🐋','🦈','🐙'],   mid:['🪸','🌊','🪸','🐠'],  hero:'🧒', props:['🧜','🐚'], sup:['🐟','🦀'], sparks:['#43e8d8','#1a6fe0','#FFF','#87CEEB']},
+  superhero: {sky:'sky-superhero',gnd:'gnd-city',   skyE:['⭐','💥','🌙','✨'],    mid:['🏙️','⚡','🏙️','💫'], hero:'🧒', props:['⚡','🦸'], sup:['🦸','🦹'], sparks:['#c0392b','#f7ca18','#FFF','#4776E6']},
+  castle:    {sky:'sky-castle',   gnd:'gnd-stone',  skyE:['🌙','⭐','🌟','🏰'],   mid:['🏰','🌲','🏰','🌲'],  hero:'🧒', props:['⚔️','🐉'], sup:['🧙','🤴'], sparks:['#e0b85a','#7b4f12','#FFF','#9b59b6']},
+  circus:    {sky:'sky-circus',   gnd:'gnd-sand',   skyE:['🌟','✨','🎪','⭐'],    mid:['🎪','🎡','🎪','🎠'],  hero:'🧒', props:['🎩','🎭'], sup:['🤹','🐘'], sparks:['#e52d27','#f7ca18','#FFF','#ff9a9e']},
+  fairies:   {sky:'sky-fairies',  gnd:'gnd-pink',   skyE:['🌸','✨','🌺','💫'],    mid:['🌺','🌸','🌷','🌻'],  hero:'🧒', props:['🧚','🌈'], sup:['🦋','🐝'], sparks:['#ff9a9e','#fad0c4','#DA22FF','#FFF']},
+  forest:    {sky:'sky-forest',   gnd:'gnd-moss',   skyE:['🌙','🍄','✨','🦋'],    mid:['🌲','🍄','🌳','🌿'],  hero:'🧒', props:['🍄','🔮'], sup:['🦊','🦉'], sparks:['#71b280','#134e5e','#FFD700','#FFF']},
+  pirates:   {sky:'sky-pirates',  gnd:'gnd-deck',   skyE:['🌊','⭐','🌙','🦜'],    mid:['⚓','🌊','🌊','🌊'],  hero:'🧒', props:['🗺️','💰'],sup:['🦜','🐙'], sparks:['#4286f4','#FFD700','#FFF','#373b44']},
+  games:     {sky:'sky-games',    gnd:'gnd-pixel',  skyE:['⭐','💎','🌟','✨'],    mid:['🕹️','⭐','💎','🌟'],  hero:'🧒', props:['🎮','👾'], sup:['👾','🤖'], sparks:['#6a11cb','#2575fc','#FFD700','#FFF']},
+  safari:    {sky:'sky-safari',   gnd:'gnd-savanna',skyE:['☀️','🌤️','🦅','☀️'],  mid:['🌴','🌾','🌴','🌾'],  hero:'🧒', props:['🦒','🐘'], sup:['🦁','🦓'], sparks:['#f4a623','#e8804a','#FFD700','#FFF']},
+  seasons:   {sky:'sky-seasons',  gnd:'gnd-snow',   skyE:['❄️','⛄','🌨️','✨'],   mid:['🌲','⛄','🌲','❄️'],  hero:'🧒', props:['❄️','🌈'],sup:['🦊','🐿️'],sparks:['#89f7fe','#66a6ff','#FFF','#b8ecff']},
+};
+
+function buildScene(theme, pageType) {
+  const s = SCENES[theme] || SCENES.adventure;
+  const isEnd = pageType === 'end';
+  const skyC  = isEnd ? 'sky-night'  : s.sky;
+  const gndC  = isEnd ? 'gnd-night'  : s.gnd;
+  const skyE  = isEnd ? ['🌙','⭐','💫','🌟'] : s.skyE;
+  const midE  = isEnd ? ['🌙','✨','💤','🌟'] : s.mid;
+  const heroE = isEnd ? '🧒💤' : s.hero;
+  const propsE= isEnd ? ['🌙','💤'] : s.props;
+  let h = '<div class="scene ' + skyC + '">';
+  skyE.forEach((e,i) => { h += '<div class="s-sky-obj k'+(i+1)+'">'+e+'</div>'; });
+  midE.forEach((e,i) => { h += '<div class="s-mid m'+(i+1)+'">'+e+'</div>'; });
+  h += '<div class="s-ground ' + gndC + '"></div>';
+  propsE.forEach((e,i) => { h += '<div class="s-prop p'+(i+1)+'">'+e+'</div>'; });
+  if (pageType !== 'title') s.sup.forEach((e,i) => { h += '<div class="s-support c'+(i+1)+'">'+e+'</div>'; });
+  h += '<div class="s-hero">'+heroE+'</div>';
+  for (let i=0;i<18;i++) {
+    const c=s.sparks[i%s.sparks.length], sz=(5+Math.random()*7).toFixed(1);
+    h += '<div class="s-spark" style="left:'+(Math.random()*92).toFixed(1)+'%;top:'+(Math.random()*80).toFixed(1)+'%;width:'+sz+'px;height:'+sz+'px;background:'+c+';animation-delay:'+(Math.random()*2.5).toFixed(2)+'s;animation-duration:'+(1.4+Math.random()*1.8).toFixed(2)+'s;"></div>';
+  }
+  return h + '</div>';
+}
+
+// ── IMAGE PROMPTS ──
+const IMG_PROMPTS = {
+  football: ['cute child playing football sunny green pitch golden light storybook watercolour','child scoring amazing football goal crowd cheering storybook art','brave little football hero with trophy magical stadium storybook','child sleeping dreaming football moonlight soft illustration'],
+  rugby:    ['cute child in rugby kit green field sunny storybook watercolour','child scoring rugby try teammates cheering magical field children book art','brave little rugby hero with trophy storybook warm colours','child sleeping dreaming rugby moonlight soft illustration'],
+  books:    ['cute child in magical glowing library books floating enchanted purple light storybook','child stepping inside magical book world fantasy glowing watercolour','brave child finding treasure inside enchanted books sparkles storybook','child sleeping surrounded glowing storybooks moonlight cosy illustration'],
+  adventure:['cute child explorer with map enchanted forest friendly animals golden sunset storybook','child meeting friendly fox rabbit magical forest storybook vivid','brave child finding magical hidden treasure enchanted land sparkles','child sleeping under stars magical forest moonlight cosy illustration'],
+  space:    ['cute child astronaut tiny rocket colourful galaxy friendly planets storybook','child floating space meeting friendly alien colourful nebula illustration','brave little astronaut discovering magical space treasure stars storybook','child sleeping rocket ship among stars moonlight cosy peaceful'],
+  dinos:    ['cute child with friendly smiling dinosaur lush jungle bright storybook watercolour','child riding friendly dinosaur magical prehistoric forest flowers storybook','brave child dinosaur friends finding magical egg jungle adventure','child sleeping cuddled small friendly dinosaur moonlight cosy jungle'],
+  ocean:    ['cute child swimming with friendly dolphins colourful coral reef underwater storybook','child meeting smiling mermaid magical underwater kingdom sparkles illustration','brave child discovering sunken treasure chest friendly fish ocean storybook','child sleeping in cosy seashell moonlight soft waves gentle illustration'],
+  superhero:['cute child wearing superhero cape flying over glittering city night storybook','child superhero saving friendly kitten from tall tree magical illustration','brave young superhero defeating silly villain with kindness children storybook','child superhero sleeping cosy bed cape glowing stars moonlight illustration'],
+  castle:   ['cute child in shining armour friendly castle courtyard storybook watercolour','child knight befriending small friendly dragon magical castle tower illustration','brave child finding enchanted sword magical kingdom sparkles children storybook','child knight sleeping cosy castle room moonlight soft candles illustration'],
+  circus:   ['cute child in circus tent friendly acrobats colourful lights storybook watercolour','child performing magic trick friendly audience sparkles circus illustration','brave child with friendly elephant magical circus ring confetti storybook','child sleeping in cosy circus caravan moonlight stars twinkling illustration'],
+  fairies:  ['cute child dancing with friendly fairies enchanted flower garden storybook','child discovering tiny fairy village inside mushroom ring magical illustration','brave child and fairy friends finding rainbow treasure magical garden storybook','child sleeping in flower meadow moonlight fairies glowing soft warm illustration'],
+  forest:   ['cute child meeting friendly talking fox enchanted forest storybook watercolour','child discovering magical glowing mushroom village forest creatures illustration','brave child and woodland friends solving magical mystery enchanted forest','child sleeping under giant oak tree moonlight forest animals watching soft'],
+  pirates:  ['cute child captain sailing friendly pirate ship sunny ocean storybook','child pirate discovering treasure island friendly parrot map illustration','brave child pirate crew finding magical golden treasure chest storybook','child pirate sleeping hammock below deck moonlight waves gentle illustration'],
+  games:    ['cute child jumping into magical video game world colourful pixels storybook','child hero collecting golden coins friendly game characters magical illustration','brave child defeating silly game boss with kindness sparkles storybook','child sleeping cosy bed magical game world glowing screen moonlight'],
+  safari:   ['cute child riding friendly giraffe sunny golden savanna storybook watercolour','child meeting smiling lion family waterhole magical africa illustration','brave child helping friendly elephant baby magical savanna sparkles storybook','child sleeping under acacia tree moonlight friendly animals gathered illustration'],
+  seasons:  ['cute child playing in magical sparkling snow friendly snowman winter storybook','child discovering spring fairy garden flowers blooming magical illustration','brave child surfing golden autumn leaves friendly squirrels storybook','child sleeping cosy fireplace winter moonlight snowflakes falling soft illustration'],
+};
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+async function generateImage(theme, pageIdx) {
+  const prompts = IMG_PROMPTS[theme] || IMG_PROMPTS.adventure;
+  const prompt = (prompts[Math.min(pageIdx, prompts.length-1)] || prompts[0]) + ', children storybook illustration, no text, watercolour, warm colours, beautiful, safe for children, high quality';
+  try {
+    const sub = await fetch('https://stablehorde.net/api/v2/generate/async', {
+      method:'POST', headers:{'Content-Type':'application/json','apikey':'0000000000'},
+      body: JSON.stringify({prompt, params:{width:768,height:432,steps:20,n:1,sampler_name:'k_euler'}, models:['stable_diffusion'], nsfw:false, censor_nsfw:true, r2:true, shared:false})
+    });
+    if (!sub.ok) return null;
+    const {id} = await sub.json();
+    if (!id) return null;
+    for (let i=0; i<30; i++) {
+      await sleep(3000);
+      const chk = await fetch('https://stablehorde.net/api/v2/generate/check/'+id);
+      if (!chk.ok) break;
+      const c = await chk.json();
+      if (c.done) {
+        const st = await fetch('https://stablehorde.net/api/v2/generate/status/'+id);
+        if (!st.ok) break;
+        const s = await st.json();
+        return s?.generations?.[0]?.img || null;
+      }
+    }
+    return null;
+  } catch { return null; }
+}
+
+// ── STORY PROMPT ──
+const THEME_MAP = {
+  football:'football — goals, teamwork, the beautiful game',
+  rugby:'rugby — scrums, tries, being brave on the field',
+  books:'magical books that come to life with wonder and spells',
+  adventure:'grand adventure in an enchanted land with treasure and friendship',
+  space:'outer space — rockets, friendly planets, and curious aliens',
+  dinos:'friendly funny dinosaurs in a prehistoric jungle',
+  ocean:'ocean adventures — mermaids, dolphins, colourful coral reefs and underwater kingdoms',
+  superhero:'superheroes — flying through the sky, saving the day with kindness and courage',
+  castle:'castles and knights — brave quests, friendly dragons, magical kingdoms',
+  circus:'circus and magic — acrobats, magicians, performing animals and sparkling lights',
+  fairies:'fairies and pixies — tiny magical worlds, enchanted gardens, rainbow dust',
+  forest:'enchanted forest — talking animals, woodland spirits, magical mushroom villages',
+  pirates:'friendly pirates — treasure maps, sailing ships, discovering magical islands',
+  games:'jumping inside a magical video game — collecting coins, defeating silly villains with kindness',
+  safari:'African safari — friendly lions, giraffes and elephants on the golden savanna',
+  seasons:'seasons and nature — magical snow days, spring flowers, autumn leaves and cosy fireplaces',
+};
+const MOOD_MAP = {
+  exciting:'exciting and action-packed, ending peacefully',
+  funny:'funny and silly with jokes a 5-year-old will love',
+  calm:'calm, warm and soothing — perfect for drifting to sleep',
+  magical:'full of wonder, sparkles and magical surprises',
+};
+
+function buildPrompt(name, theme, mood, length) {
+  const pages = length === 'long' ? 5 : 3;
+  const wpg   = length === 'long' ? 75 : 95;
+  let mid = '';
+  for (let i=2; i<pages; i++) mid += 'PAGE '+i+':\n[story continues ~'+wpg+' words]\n\n';
+  return 'Write a beautiful children\'s bedtime storybook for a 5-year-old child named '+name+'.\nTheme: '+(THEME_MAP[theme]||theme)+'\nMood: '+(MOOD_MAP[mood]||mood)+'\nTotal pages: exactly '+pages+'\n\nFORMAT — follow exactly:\nTITLE: [magical story title]\n\nPAGE 1:\n[opening scene — introduce '+name+' and the world ~'+wpg+' words]\n\n'+mid+'PAGE '+pages+':\n[peaceful ending — '+name+' is cosy, happy, safe and drifting to sleep ~'+wpg+' words]\n\nRules:\n- '+name+' is the kind brave hero throughout\n- Simple warm loving language for age 5\n- No scary moments — wholesome, magical, sweet\n- Each PAGE is a complete paragraph\n- Make '+name+' feel truly special and loved\n- NEVER include violence, fear, or adult themes';
+}
+
+function parseStory(raw) {
+  let title = 'Bedtime Storybook ✨', pages = [], cur = null;
+  for (const line of raw.split('\n')) {
+    const tM = line.match(/^TITLE:\s*(.+)/i);
+    if (tM) { title = tM[1].trim(); continue; }
+    const pM = line.match(/^PAGE\s*\d+\s*:/i);
+    if (pM) { if (cur !== null) pages.push(cur.trim()); cur = ''; continue; }
+    if (cur !== null) cur += line + '\n';
+  }
+  if (cur?.trim()) pages.push(cur.trim());
+  return { title, pages };
+}
+
+function renderBook(storyData, theme, name, imgUrls) {
+  document.getElementById('bookTitle').textContent = storyData.title;
+  document.getElementById('bookSub').textContent = 'A magical story for ' + name + ' ✨';
+  const container = document.getElementById('pages');
+  container.innerHTML = '';
+  storyData.pages.forEach((text, i) => {
+    const isTitle = i === 0;
+    const isEnd   = i === storyData.pages.length - 1;
+    const pType   = isTitle ? 'title' : isEnd ? 'end' : 'story';
+    const page = document.createElement('div');
+    page.className = 'page ' + (isTitle ? 'title-page' : isEnd ? 'end-page' : 'story-page');
+    const illusDiv = document.createElement('div');
+    illusDiv.className = 'page-illus';
+    if (imgUrls && imgUrls[i]) {
+      const img = document.createElement('img');
+      img.src = imgUrls[i];
+      img.alt = 'Page ' + (i+1) + ' illustration';
+      img.onerror = () => { illusDiv.innerHTML = buildScene(theme, pType); };
+      illusDiv.appendChild(img);
+    } else {
+      illusDiv.innerHTML = buildScene(theme, pType);
+    }
+    const badge = document.createElement('div');
+    badge.className = 'page-num-badge';
+    badge.textContent = isTitle ? '📖' : 'Page ' + i;
+    illusDiv.appendChild(badge);
+    if (isTitle) {
+      const ov = document.createElement('div');
+      ov.className = 'title-overlay';
+      ov.innerHTML = '<h2>' + storyData.title + '</h2><p>A bedtime story for ' + name + ' ✨</p>';
+      illusDiv.appendChild(ov);
+    }
+    page.appendChild(illusDiv);
+    const body = document.createElement('div');
+    body.className = 'page-body';
+    body.innerHTML = '<div class="page-chapter">' + (isTitle ? '✨ Once upon a time...' : isEnd ? '🌙 The End...' : '📖 Page ' + i) + '</div><div class="page-text' + (isEnd ? ' italic' : '') + '">' + text + '</div>';
+    page.appendChild(body);
+    container.appendChild(page);
+  });
+}
+
+function setProgress(pct) { document.getElementById('progFill').style.width = pct + '%'; }
+
+let lastStory = null;
+
+async function generate() {
+  const rawName = document.getElementById('heroName').value.trim();
+  const name  = rawName.replace(/[^a-zA-Z\s'-]/g,'').trim() || 'Lucas';
+  const theme = sel('theme') || 'football';
+  const mood  = sel('mood')  || 'exciting';
+  const len   = sel('len')   || 'short';
+  const warn  = document.getElementById('warn');
+  warn.className = 'warning';
+  document.getElementById('setupScreen').style.display = 'none';
+  document.getElementById('bookScreen').classList.remove('show');
+  document.getElementById('loadScreen').classList.add('show');
+  document.getElementById('btnGo').disabled = true;
+  setProgress(5);
+  try {
+    document.getElementById('loadTitle').textContent = '✍️ Writing the story...';
+    document.getElementById('loadSub').innerHTML = 'The story fairies are weaving magic!<br/>Just a moment... ✨';
+    setProgress(15);
+    const res = await fetch('/api/story', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'llama-3.3-70b-versatile',
+        messages:[
+          {role:'system', content:"You are a magical children's storybook author. Write warm imaginative bedtime stories for young children aged 3-7. Stories must be wholesome, safe, and follow the page format exactly. Never include violence, fear, adult themes, or anything inappropriate for young children."},
+          {role:'user', content: buildPrompt(name, theme, mood, len)}
+        ],
+        temperature:0.85,
+        max_tokens: len === 'long' ? 1400 : 900
+      })
+    });
+    if (!res.ok) {
+      const e = await res.json().catch(() => ({}));
+      throw new Error(e.error || 'HTTP ' + res.status);
+    }
+    const data = await res.json();
+    const storyData = parseStory(data.choices[0].message.content.trim());
+    lastStory = storyData;
+    setProgress(40);
+    document.getElementById('loadTitle').textContent = '🎨 Painting the illustrations...';
+    const total = storyData.pages.length;
+    const imgUrls = [];
+    for (let i=0; i<total; i++) {
+      setProgress(Math.round(40 + (i/total)*55));
+      document.getElementById('loadSub').innerHTML = '🖌️ Painting illustration ' + (i+1) + ' of ' + total + '... ✨';
+      imgUrls.push(await generateImage(theme, i));
+    }
+    setProgress(98);
+    renderBook(storyData, theme, name, imgUrls);
+    document.getElementById('loadScreen').classList.remove('show');
+    document.getElementById('bookScreen').classList.add('show');
+    document.getElementById('btnGo').disabled = false;
+    setProgress(100);
+    window.scrollTo({top:0, behavior:'smooth'});
+  } catch(err) {
+    document.getElementById('loadScreen').classList.remove('show');
+    document.getElementById('setupScreen').style.display = 'block';
+    document.getElementById('btnGo').disabled = false;
+    setProgress(0);
+    warn.className = 'warning show';
+    warn.innerHTML = '😔 <strong>Oops!</strong> ' + err.message + '<br/><small>Please try again in a moment ✨</small>';
+  }
+}
+
+function backSetup() {
+  document.getElementById('bookScreen').classList.remove('show');
+  document.getElementById('setupScreen').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function newStory() { backSetup(); }
+
+function readBook() {
+  if (!lastStory) return;
+  window.speechSynthesis.cancel();
+  const txt = lastStory.title + '. ' + lastStory.pages.join(' ... ');
+  const utt = new SpeechSynthesisUtterance(txt);
+  utt.rate = .82; utt.pitch = 1.05; utt.volume = 1;
+  const pref = window.speechSynthesis.getVoices().find(v => v.name.includes('Google UK') || v.name.includes('Daniel') || v.lang === 'en-GB');
+  if (pref) utt.voice = pref;
+  window.speechSynthesis.speak(utt);
+}
+function stopReading() { window.speechSynthesis.cancel(); }
+window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+
+function copyBook() {
+  if (!lastStory) return;
+  const txt = lastStory.title + '\n\n' + lastStory.pages.map((p,i) => 'Page '+(i+1)+':\n'+p).join('\n\n');
+  navigator.clipboard.writeText(txt).then(() => alert('Story copied! 📋')).catch(() => alert('Select text manually to copy.'));
+}
+
+// ── PWA ──
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+let deferredPrompt = null;
+const banner = document.getElementById('installBanner');
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault(); deferredPrompt = e;
+  setTimeout(() => { if (deferredPrompt) banner.classList.add('show'); }, 3000);
+});
+document.getElementById('installBtn').addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  banner.classList.remove('show');
+});
+document.getElementById('dismissInstall').addEventListener('click', () => banner.classList.remove('show'));
+window.addEventListener('appinstalled', () => { banner.classList.remove('show'); deferredPrompt = null; });
+</script>
+</body>
+</html>
