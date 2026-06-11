@@ -40,6 +40,16 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 .pill[data-value=ballet].selected{background:linear-gradient(135deg,#ff9a9e,#DA22FF);color:#fff;}
 .pill[data-value=robots].selected{background:linear-gradient(135deg,#4776E6,#00FF88);color:#111;}
 .pill[data-value=jungle].selected{background:linear-gradient(135deg,#134e5e,#56ab2f);color:#fff;}
+.pill[data-value=en].selected{background:linear-gradient(135deg,#012169,#C8102E);color:#fff;}
+.pill[data-value=fr].selected{background:linear-gradient(135deg,#002395,#ED2939);color:#fff;}
+.pill[data-value=es].selected{background:linear-gradient(135deg,#AA151B,#F1BF00);color:#111;}
+.pill[data-value=pt].selected{background:linear-gradient(135deg,#009C3B,#FFDF00);color:#111;}
+.pill[data-value=de].selected{background:linear-gradient(135deg,#000,#DD0000);color:#fff;}
+.pill[data-value=it].selected{background:linear-gradient(135deg,#009246,#CE2B37);color:#fff;}
+.pill[data-value=nl].selected{background:linear-gradient(135deg,#AE1C28,#21468B);color:#fff;}
+.pill[data-value=pl].selected{background:linear-gradient(135deg,#DC143C,#fff);color:#111;}
+.pill[data-value=ar].selected{background:linear-gradient(135deg,#006C35,#fff);color:#111;}
+.pill[data-value=zh].selected{background:linear-gradient(135deg,#DE2910,#FFDE00);color:#111;}
 .pill[data-value=exciting].selected{background:linear-gradient(135deg,#f7971e,#ffd200);color:#111;}
 .pill[data-value=funny].selected{background:linear-gradient(135deg,#fc5c7d,#6a3093);color:#fff;}
 .pill[data-value=calm].selected{background:linear-gradient(135deg,#2193b0,#6dd5ed);color:#111;}
