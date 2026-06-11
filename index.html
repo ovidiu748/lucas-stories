@@ -1,148 +1,146 @@
-:root{--gold:#FFD700;--gold2:#FFA500;--card:rgba(255,255,255,.07);--border:rgba(255,255,255,.14);}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px 16px 48px;overflow-x:hidden;}
-body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(1px 1px at 8% 15%,white,transparent),radial-gradient(1px 1px at 25% 55%,white,transparent),radial-gradient(1px 1px at 45% 8%,white,transparent),radial-gradient(1px 1px at 65% 75%,white,transparent),radial-gradient(1px 1px at 88% 28%,white,transparent),radial-gradient(2px 2px at 38% 68%,rgba(255,255,255,.7),transparent),radial-gradient(2px 2px at 82% 58%,rgba(255,255,255,.7),transparent);pointer-events:none;z-index:0;animation:twinkle 5s infinite alternate;}
-@keyframes twinkle{0%{opacity:.5}100%{opacity:1}}
-.wrap{width:100%;max-width:720px;position:relative;z-index:1;}
-.header{text-align:center;margin-bottom:26px;padding-top:14px;}
-.moon-icon{font-size:54px;display:block;animation:float 3s ease-in-out infinite;}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.header h1{font-family:'Fredoka One',cursive;font-size:2.2em;color:var(--gold);text-shadow:0 0 24px rgba(255,215,0,.5);margin-top:8px;}
-.header p{color:#b0b8d4;font-size:.92em;margin-top:4px;}
-.free-badge{display:inline-block;margin-top:10px;background:linear-gradient(135deg,#11998e,#38ef7d);color:#0a2a1a;font-size:.75em;font-weight:800;padding:4px 14px;border-radius:20px;letter-spacing:.5px;}
-.card{background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:22px;padding:24px;margin-bottom:16px;}
-.section-label{font-size:.73em;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#a0aec0;margin-bottom:10px;}
-.hero-row{display:flex;align-items:center;gap:10px;background:rgba(255,215,0,.1);border:2px solid rgba(255,215,0,.3);border-radius:13px;padding:11px 15px;margin-bottom:20px;}
-.hero-row input{background:none;border:none;outline:none;font-family:'Fredoka One',cursive;font-size:1.3em;color:var(--gold);width:100%;}
-.pill-group{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
-.pill{padding:8px 15px;border-radius:50px;border:2px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);color:#d0d8f0;font-size:.85em;font-weight:600;cursor:pointer;transition:all .2s;user-select:none;}
-.pill:hover{border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.11);transform:translateY(-2px);}
-.pill.selected{border-color:transparent;transform:translateY(-2px);}
-.pill[data-value=football].selected{background:linear-gradient(135deg,#11998e,#38ef7d);color:#111;}
-.pill[data-value=rugby].selected{background:linear-gradient(135deg,#f7971e,#ffd200);color:#111;}
-.pill[data-value=books].selected{background:linear-gradient(135deg,#8e2de2,#4a00e0);color:#fff;}
-.pill[data-value=adventure].selected{background:linear-gradient(135deg,#f953c6,#b91d73);color:#fff;}
-.pill[data-value=space].selected{background:linear-gradient(135deg,#4776E6,#8E54E9);color:#fff;}
-.pill[data-value=dinos].selected{background:linear-gradient(135deg,#56ab2f,#a8e063);color:#111;}
-.pill[data-value=ocean].selected{background:linear-gradient(135deg,#1a6fe0,#43e8d8);color:#111;}
-.pill[data-value=superhero].selected{background:linear-gradient(135deg,#c0392b,#f7ca18);color:#111;}
-.pill[data-value=castle].selected{background:linear-gradient(135deg,#7b4f12,#e0b85a);color:#111;}
-.pill[data-value=circus].selected{background:linear-gradient(135deg,#e52d27,#b31217);color:#fff;}
-.pill[data-value=fairies].selected{background:linear-gradient(135deg,#ff9a9e,#fad0c4);color:#111;}
-.pill[data-value=forest].selected{background:linear-gradient(135deg,#134e5e,#71b280);color:#fff;}
-.pill[data-value=pirates].selected{background:linear-gradient(135deg,#373b44,#4286f4);color:#fff;}
-.pill[data-value=games].selected{background:linear-gradient(135deg,#6a11cb,#2575fc);color:#fff;}
-.pill[data-value=safari].selected{background:linear-gradient(135deg,#f4a623,#e8804a);color:#111;}
-.pill[data-value=seasons].selected{background:linear-gradient(135deg,#89f7fe,#66a6ff);color:#111;}
-.pill[data-value=exciting].selected{background:linear-gradient(135deg,#f7971e,#ffd200);color:#111;}
-.pill[data-value=funny].selected{background:linear-gradient(135deg,#fc5c7d,#6a3093);color:#fff;}
-.pill[data-value=calm].selected{background:linear-gradient(135deg,#2193b0,#6dd5ed);color:#111;}
-.pill[data-value=magical].selected{background:linear-gradient(135deg,#DA22FF,#9733EE);color:#fff;}
-.pill[data-value=short].selected{background:linear-gradient(135deg,#2193b0,#6dd5ed);color:#111;}
-.pill[data-value=long].selected{background:linear-gradient(135deg,#f953c6,#b91d73);color:#fff;}
-.warning{display:none;background:rgba(255,80,80,.13);border:1px solid rgba(255,80,80,.28);border-radius:12px;padding:12px 16px;color:#ffb3b3;font-size:.84em;margin-bottom:14px;line-height:1.55;}
-.warning.show{display:block;}
-.btn-go{width:100%;padding:17px;border-radius:15px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1a2e;font-family:'Fredoka One',cursive;font-size:1.22em;cursor:pointer;transition:all .3s;box-shadow:0 6px 20px rgba(255,165,0,.4);display:flex;align-items:center;justify-content:center;gap:10px;}
-.btn-go:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(255,165,0,.6);}
-.btn-go:disabled{opacity:.55;cursor:not-allowed;transform:none;}
-#loadScreen{display:none;text-align:center;padding:60px 20px;}
-#loadScreen.show{display:block;}
-.load-moon{font-size:3.5em;display:block;animation:spin-float 2s ease-in-out infinite;}
-@keyframes spin-float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-16px) rotate(18deg)}}
-.load-title{font-family:'Fredoka One',cursive;font-size:1.35em;color:var(--gold);margin-top:16px;}
-.load-sub{color:#8892b0;margin-top:7px;font-size:.92em;line-height:1.65;}
-.prog-bar{width:260px;height:6px;background:rgba(255,255,255,.1);border-radius:10px;margin:18px auto 0;overflow:hidden;}
-.prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:10px;transition:width .5s ease;}
-#bookScreen{display:none;width:100%;}
-#bookScreen.show{display:block;}
-.book-header{text-align:center;margin-bottom:22px;}
-.book-main-title{font-family:'Fredoka One',cursive;font-size:1.9em;color:var(--gold);text-shadow:0 0 20px rgba(255,215,0,.4);}
-.book-sub{color:#b0b8d4;font-size:.88em;margin-top:4px;}
-.page{background:rgba(255,255,255,.055);backdrop-filter:blur(12px);border:1px solid rgba(255,215,0,.17);border-radius:24px;overflow:hidden;margin-bottom:26px;animation:pageIn .55s ease both;}
-.page:nth-child(1){animation-delay:.05s}.page:nth-child(2){animation-delay:.15s}.page:nth-child(3){animation-delay:.25s}.page:nth-child(4){animation-delay:.35s}.page:nth-child(5){animation-delay:.45s}
-@keyframes pageIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-.page-illus{width:100%;position:relative;overflow:hidden;}
-.title-page .page-illus{height:340px;}.story-page .page-illus{height:265px;}.end-page .page-illus{height:300px;}
-.page-illus img{width:100%;height:100%;object-fit:cover;display:block;}
-.scene{width:100%;height:100%;position:relative;overflow:hidden;}
-.sky-football{background:linear-gradient(180deg,#87CEEB,#b8e8a0 58%,#3a9e52);}
-.sky-rugby{background:linear-gradient(180deg,#a0d8e8,#8aca88 58%,#2d8a3a);}
-.sky-books{background:linear-gradient(180deg,#0a0520,#1e0d5a 58%,#3520a0);}
-.sky-adventure{background:linear-gradient(180deg,#ff9060,#1e7a50 52%,#0d4a28);}
-.sky-space{background:linear-gradient(180deg,#000308,#010920 52%,#020d38);}
-.sky-dinos{background:linear-gradient(180deg,#a0e880,#3db83d 58%,#1a6a1a);}
-.sky-ocean{background:linear-gradient(180deg,#0077b6,#0096c7 40%,#00b4d8);}
-.sky-superhero{background:linear-gradient(180deg,#1a1a2e,#16213e 50%,#0f3460);}
-.sky-castle{background:linear-gradient(180deg,#614385,#516395 52%,#2c3e6b);}
-.sky-circus{background:linear-gradient(180deg,#f7c59f,#e8a87c 50%,#d4855a);}
-.sky-fairies{background:linear-gradient(180deg,#fbc2eb,#e8a0d0 50%,#c96faf);}
-.sky-forest{background:linear-gradient(180deg,#134e5e,#1a6a4a 52%,#0d4a28);}
-.sky-pirates{background:linear-gradient(180deg,#1a3a5c,#1e4d7a 50%,#2166a0);}
-.sky-games{background:linear-gradient(180deg,#0d001a,#1a0535 50%,#2d0b5e);}
-.sky-safari{background:linear-gradient(180deg,#f4d03f,#e8a830 50%,#c47320);}
-.sky-seasons{background:linear-gradient(180deg,#e0f7ff,#b8ecff 50%,#7ad4f5);}
-.sky-night{background:linear-gradient(180deg,#010310,#050e2a 52%,#0a1540);}
-.s-ground{position:absolute;bottom:0;left:0;right:0;height:62px;border-radius:50% 50% 0 0/22px 22px 0 0;}
-.gnd-green{background:#2a7a35;}.gnd-dark{background:#1a1a50;}.gnd-jungle{background:#1a5a1a;}
-.gnd-space{background:#02061a;}.gnd-night{background:#050d25;}.gnd-ocean{background:#005f8a;}
-.gnd-city{background:#1a1a2e;}.gnd-stone{background:#4a3728;}.gnd-sand{background:#c8a96a;}
-.gnd-pink{background:#c060a0;}.gnd-moss{background:#2d5a1b;}.gnd-deck{background:#4a3010;}
-.gnd-pixel{background:#1a0535;}.gnd-savanna{background:#b8860b;}.gnd-snow{background:#c8e8f8;}
-.s-sky-obj{position:absolute;font-size:2em;animation:sky-d 6s ease-in-out infinite;}
-.s-sky-obj.k1{top:9%;left:7%;font-size:1.8em;}.s-sky-obj.k2{top:7%;right:9%;animation-delay:1s;font-size:2.2em;}
-.s-sky-obj.k3{top:20%;left:30%;animation-delay:2s;font-size:1.5em;}.s-sky-obj.k4{top:14%;right:28%;animation-delay:.5s;}
-@keyframes sky-d{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px) translateX(4px)}}
-.s-mid{position:absolute;bottom:56px;font-size:3em;animation:mid-s 4s ease-in-out infinite;}
-.s-mid.m1{left:4%;}.s-mid.m2{left:13%;animation-delay:.6s;font-size:2.5em;}.s-mid.m3{right:4%;animation-delay:.3s;}.s-mid.m4{right:13%;animation-delay:.9s;font-size:2.5em;}
-@keyframes mid-s{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-5px) rotate(1deg)}}
-.s-hero{position:absolute;bottom:49px;left:50%;transform:translateX(-50%);font-size:5.8em;line-height:1;filter:drop-shadow(0 8px 14px rgba(0,0,0,.4));animation:h-b 2.4s ease-in-out infinite;z-index:5;}
-.title-page .s-hero{font-size:7.2em;bottom:54px;}.end-page .s-hero{font-size:4.8em;animation:breathe 4s ease-in-out infinite;}
-@keyframes h-b{0%,100%{transform:translateX(-50%) translateY(0) rotate(-3deg)}50%{transform:translateX(-50%) translateY(-13px) rotate(3deg)}}
-@keyframes breathe{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.04)}}
-.s-support{position:absolute;bottom:50px;font-size:3.2em;filter:drop-shadow(0 4px 8px rgba(0,0,0,.3));animation:s-bob 3s ease-in-out infinite;}
-.s-support.c1{left:9%;animation-delay:.4s;}.s-support.c2{right:9%;animation-delay:.8s;}
-@keyframes s-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-.s-prop{position:absolute;bottom:47px;font-size:2.3em;animation:p-p 3s ease-in-out infinite;z-index:3;}
-.s-prop.p1{left:28%;animation-delay:.2s;}.s-prop.p2{right:28%;animation-delay:.7s;}
-@keyframes p-p{0%,100%{transform:scale(1) rotate(-5deg)}50%{transform:scale(1.12) rotate(5deg)}}
-.s-spark{position:absolute;border-radius:50%;animation:sp 2s ease-in-out infinite;opacity:0;}
-@keyframes sp{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.3)}}
-.page-num-badge{position:absolute;top:11px;right:13px;background:rgba(0,0,0,.45);color:var(--gold);font-family:'Fredoka One',cursive;font-size:.78em;padding:3px 12px;border-radius:20px;z-index:10;}
-.title-overlay{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(0deg,rgba(0,0,0,.75),transparent);z-index:8;}
-.title-overlay h2{font-family:'Fredoka One',cursive;font-size:1.55em;color:var(--gold);line-height:1.2;}
-.title-overlay p{color:rgba(255,255,255,.65);font-size:.8em;margin-top:3px;}
-.page-body{padding:22px 26px 20px;}
-.page-chapter{font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#718096;margin-bottom:9px;}
-.page-text{font-family:'Lora',serif;color:#d8e0f8;font-size:1.06em;line-height:1.92;}
-.page-text.italic{font-style:italic;color:#c4d0f0;}
-.book-controls{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:6px;margin-bottom:16px;}
-.btn-c{padding:10px 20px;border-radius:50px;border:2px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#d0d8f0;font-family:'Nunito',sans-serif;font-weight:700;font-size:.88em;cursor:pointer;transition:all .2s;}
-.btn-c:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4);transform:translateY(-2px);}
-.btn-c.prime{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1a2e;border-color:transparent;box-shadow:0 4px 14px rgba(255,165,0,.35);}
-.donate-banner{text-align:center;margin:8px 0 24px;padding:18px 20px;background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);border-radius:16px;}
-.donate-banner p{color:#b0b8d4;font-size:.86em;line-height:1.6;margin-bottom:12px;}
-.donate-banner a{display:inline-block;padding:11px 26px;background:linear-gradient(135deg,#ff6b6b,#ee0979);color:#fff;font-family:'Fredoka One',cursive;font-size:1em;border-radius:50px;text-decoration:none;box-shadow:0 4px 14px rgba(238,9,121,.4);transition:all .2s;}
-.donate-banner a:hover{transform:translateY(-2px);box-shadow:0 7px 20px rgba(238,9,121,.6);}
-#installBanner{display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:12px 16px;background:linear-gradient(135deg,#302b63,#0f0c29);border-top:1px solid rgba(255,215,0,.3);box-shadow:0 -4px 20px rgba(0,0,0,.4);}
-#installBanner.show{display:block;}
-#installContent{display:flex;align-items:center;gap:12px;max-width:720px;margin:0 auto;}
-#installContent>div{flex:1;}
-#installBtn{padding:9px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,#FFD700,#FFA500);color:#1a1a2e;font-family:'Fredoka One',cursive;font-size:.95em;cursor:pointer;white-space:nowrap;}
-#dismissInstall{padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#718096;cursor:pointer;font-size:1em;}
-.footer{text-align:center;color:#3a4258;font-size:.76em;padding:10px 0 18px;}
-.footer a{color:#ff6b6b;text-decoration:none;}
-#journalBadge{display:none;background:#ee0979;color:#fff;font-size:.65em;font-weight:800;padding:2px 7px;border-radius:20px;margin-left:4px;}
-.journal-header{text-align:center;margin-bottom:22px;}
-.journal-header h2{font-family:'Fredoka One',cursive;font-size:1.8em;color:var(--gold);}
-.journal-header p{color:#b0b8d4;font-size:.88em;margin-top:4px;}
-.journal-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,215,0,.15);border-radius:18px;padding:18px 20px;margin-bottom:14px;animation:pageIn .4s ease both;}
-.journal-ep{font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#718096;margin-bottom:6px;}
-.journal-title{font-family:'Fredoka One',cursive;font-size:1.15em;color:var(--gold);margin-bottom:8px;}
-.journal-summary{font-family:'Lora',serif;color:#a0b0d0;font-size:.84em;line-height:1.7;margin-bottom:14px;}
-.journal-actions{display:flex;flex-wrap:wrap;gap:8px;}
-#continueBanner{background:linear-gradient(135deg,rgba(56,239,125,.12),rgba(71,118,230,.12));border:1px solid rgba(56,239,125,.3);border-radius:16px;padding:16px 20px;margin-bottom:16px;text-align:center;}
-#continueBanner p{color:#b0b8d4;font-size:.86em;margin-bottom:10px;}
-#continueBanner strong{color:#38ef7d;}
-.btn-continue{display:inline-block;padding:11px 24px;background:linear-gradient(135deg,#11998e,#38ef7d);color:#0a2a1a;font-family:'Fredoka One',cursive;font-size:1em;border-radius:50px;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(56,239,125,.35);transition:all .2s;}
-.btn-continue:hover{transform:translateY(-2px);box-shadow:0 7px 20px rgba(56,239,125,.55);}
-@media(max-width:500px){.header h1{font-size:1.7em}.card{padding:18px}.pill{font-size:.8em;padding:6px 11px}.page-body{padding:17px 18px}.s-hero{font-size:4.2em}.title-page .s-hero{font-size:5.5em}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>✨ Bedtime Storybook</title>
+  <link rel="manifest" href="manifest.json"/>
+  <meta name="theme-color" content="#302b63"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Bedtime Stories"/>
+  <link rel="apple-touch-icon" href="icons/icon.svg"/>
+  <meta name="description" content="Free magical AI bedtime storybook for children. A brand new illustrated story every night!"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- SETUP SCREEN -->
+  <div id="setupScreen">
+    <div class="header">
+      <span class="moon-icon">🌙</span>
+      <h1>Bedtime Storybook</h1>
+      <p>A magical illustrated story, every single night ✨</p>
+      <span class="free-badge">🌍 100% Free · No Account Needed</span>
+      <div style="margin-top:12px">
+        <button class="btn-c" onclick="showJournal()" style="font-size:.82em;padding:7px 16px">
+          📚 My Story Journal <span id="journalBadge"></span>
+        </button>
+      </div>
+    </div>
+    <div id="continueBanner" style="display:none">
+      <p>🌙 <strong id="continueTitle"></strong> ended — but the adventure is not over!</p>
+      <button class="btn-continue" onclick="continueFromJournal()">✨ Continue the Adventure!</button>
+    </div>
+    <div class="warning" id="warn"></div>
+    <div class="card">
+      <div class="section-label">🦸 Hero Name</div>
+      <div class="hero-row">
+        <span style="font-size:1.6em">⭐</span>
+        <input type="text" id="heroName" value="Lucas" placeholder="Your child's name..." maxlength="30"/>
+      </div>
+      <div class="section-label">🎨 Tonight's Theme</div>
+      <div class="pill-group">
+        <button class="pill selected" data-group="theme" data-value="football">⚽ Football</button>
+        <button class="pill" data-group="theme" data-value="rugby">🏉 Rugby</button>
+        <button class="pill" data-group="theme" data-value="books">📚 Magic Books</button>
+        <button class="pill" data-group="theme" data-value="adventure">🗺️ Adventure</button>
+        <button class="pill" data-group="theme" data-value="space">🚀 Space</button>
+        <button class="pill" data-group="theme" data-value="dinos">🦕 Dinosaurs</button>
+        <button class="pill" data-group="theme" data-value="ocean">🌊 Ocean</button>
+        <button class="pill" data-group="theme" data-value="superhero">⚡ Superheroes</button>
+        <button class="pill" data-group="theme" data-value="castle">🏰 Castles</button>
+        <button class="pill" data-group="theme" data-value="circus">🎪 Circus</button>
+        <button class="pill" data-group="theme" data-value="fairies">🧚 Fairies</button>
+        <button class="pill" data-group="theme" data-value="forest">🍄 Enchanted Forest</button>
+        <button class="pill" data-group="theme" data-value="pirates">🏴☠️ Pirates</button>
+        <button class="pill" data-group="theme" data-value="games">🎮 Video Games</button>
+        <button class="pill" data-group="theme" data-value="safari">🦁 Safari</button>
+        <button class="pill" data-group="theme" data-value="seasons">❄️ Seasons</button>
+      </div>
+      <div class="section-label">💫 Story Mood</div>
+      <div class="pill-group">
+        <button class="pill selected" data-group="mood" data-value="exciting">⚡ Exciting</button>
+        <button class="pill" data-group="mood" data-value="funny">😄 Funny</button>
+        <button class="pill" data-group="mood" data-value="calm">🌊 Calm &amp; Sleepy</button>
+        <button class="pill" data-group="mood" data-value="magical">🔮 Magical</button>
+      </div>
+      <div class="section-label">📄 Pages</div>
+      <div class="pill-group">
+        <button class="pill selected" data-group="len" data-value="short">🌟 3 pages</button>
+        <button class="pill" data-group="len" data-value="long">📖 5 pages</button>
+      </div>
+    </div>
+    <button class="btn-go" id="btnGo" onclick="generate()">
+      <span>📖</span> Create Tonight's Story <span>✨</span>
+    </button>
+  </div>
+
+  <!-- LOADING SCREEN -->
+  <div id="loadScreen">
+    <span class="load-moon">🌙</span>
+    <div class="load-title" id="loadTitle">Writing the story...</div>
+    <div class="load-sub" id="loadSub">The story fairies are at work! ✨</div>
+    <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+  </div>
+
+  <!-- BOOK SCREEN -->
+  <div id="bookScreen">
+    <div class="book-header">
+      <div class="book-main-title" id="bookTitle">Bedtime Storybook</div>
+      <div class="book-sub" id="bookSub">Tonight's magical adventure ✨</div>
+    </div>
+    <div id="pages"></div>
+    <div class="book-controls">
+      <button class="btn-c prime" onclick="newStory()">📖 New Story</button>
+      <button class="btn-c prime" onclick="continueStory()">✨ Continue!</button>
+      <button class="btn-c" onclick="readBook()">🔊 Read Aloud</button>
+      <button class="btn-c" onclick="stopReading()">⏹ Stop</button>
+      <button class="btn-c" onclick="showJournal()">📚 Journal</button>
+      <button class="btn-c" onclick="backSetup()">⚙️ Settings</button>
+    </div>
+    <div class="donate-banner">
+      <p>✨ This app is <strong>completely free</strong> for every child in the world.<br/>If it brought a smile to your little one's face, a small donation keeps the magic going 🌙</p>
+      <a href="https://buymeacoffee.com/moldox" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+    </div>
+  </div>
+
+  <!-- JOURNAL SCREEN -->
+  <div id="journalScreen" style="display:none">
+    <div class="journal-header">
+      <span style="font-size:2.5em">📚</span>
+      <h2>Story Journal</h2>
+      <p>All your magical adventures ✨</p>
+    </div>
+    <div id="journalList"></div>
+    <div style="text-align:center;margin:8px 0 28px">
+      <button class="btn-c" onclick="closeJournal()">← Back to Home</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    Made with ❤️ for children everywhere · Sweet dreams 🌙<br/>
+    <a href="https://buymeacoffee.com/moldox" target="_blank" rel="noopener">☕ Support this project</a>
+  </div>
+</div>
+
+<!-- INSTALL BANNER -->
+<div id="installBanner">
+  <div id="installContent">
+    <span style="font-size:2em">📲</span>
+    <div>
+      <div style="font-family:'Fredoka One',cursive;font-size:1.05em;color:#FFD700">Add to Home Screen!</div>
+      <div style="font-size:.8em;color:#b0b8d4;margin-top:2px">One tap for a bedtime story every night</div>
+    </div>
+    <button id="installBtn">Install ✨</button>
+    <button id="dismissInstall">✕</button>
+  </div>
+</div>
+
+<script src="stories.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
