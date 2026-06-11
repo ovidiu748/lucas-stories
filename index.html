@@ -188,7 +188,12 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
       <button class="pill" data-group="mood" data-value="magical">🔮 Magical</button>
     </div>
     <div class="section-label">📄 Pages</div>
-    <div class="pill-group">
+.btn-c.donate{background:linear-gradient(135deg,#ff6b6b,#ee0979);color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(238,9,121,.35);}
+.btn-c.donate:hover{box-shadow:0 7px 20px rgba(238,9,121,.55);}
+.donate-banner{text-align:center;margin:8px 0 20px;padding:16px 20px;background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);border-radius:16px;}
+.donate-banner p{color:#b0b8d4;font-size:.84em;line-height:1.6;margin-bottom:12px;}
+.donate-banner a{display:inline-block;padding:10px 24px;background:linear-gradient(135deg,#ff6b6b,#ee0979);color:#fff;font-family:'Fredoka One',cursive;font-size:1em;border-radius:50px;text-decoration:none;box-shadow:0 4px 14px rgba(238,9,121,.4);transition:all .2s;}
+.donate-banner a:hover{transform:translateY(-2px);box-shadow:0 7px 20px rgba(238,9,121,.6);}
       <button class="pill selected" data-group="len" data-value="short">🌟 3 pages</button>
       <button class="pill" data-group="len" data-value="long">📖 5 pages</button>
     </div>
@@ -240,34 +245,24 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 document.getElementById('heroName').addEventListener('input', function() {
   this.value = this.value.replace(/[^a-zA-Z\s'-]/g, '').slice(0, 30);
 });
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-// ── PILLS ──
-document.querySelectorAll('.pill').forEach(p => {
-  p.addEventListener('click', () => {
-    document.querySelectorAll('.pill[data-group="' + p.dataset.group + '"]').forEach(x => x.classList.remove('selected'));
-    p.classList.add('selected');
-  });
-});
-const sel = g => { const e = document.querySelector('.pill[data-group="' + g + '"].selected'); return e ? e.dataset.value : null; };
-
-// ── SCENES ──
-const SCENES = {
-  football:  {sky:'sky-football', gnd:'gnd-green',  skyE:['☀️','⛅','🌤️','☁️'],   mid:['🌳','🌲','🌳','🌲'],  hero:'🧒', props:['⚽','🥅'], sup:['🧑','👦'], sparks:['#FFD700','#FFF','#38ef7d','#87CEEB']},
-  rugby:     {sky:'sky-rugby',    gnd:'gnd-green',  skyE:['⛅','☀️','🌈','🌤️'],   mid:['🌿','🌳','🌿','🌳'],  hero:'🧒', props:['🏉','🏆'], sup:['🧑','👦'], sparks:['#FFD700','#FFA500','#FFF','#a8e063']},
-  books:     {sky:'sky-books',    gnd:'gnd-dark',   skyE:['🌙','⭐','💫','✨'],    mid:['📚','🕯️','📚','🪄'],  hero:'🧒', props:['📖','✨'], sup:['🦉','🐱'], sparks:['#DA22FF','#9733EE','#FFD700','#fff']},
-  adventure: {sky:'sky-adventure',gnd:'gnd-jungle', skyE:['🌅','🦋','🌟','🌸'],   mid:['🌳','🌴','🌳','🌴'],  hero:'🧒', props:['🗺️','💎'], sup:['🦊','🐰'], sparks:['#f953c6','#FFD700','#38ef7d','#FFF']},
-  space:     {sky:'sky-space',    gnd:'gnd-space',  skyE:['⭐','🌟','💫','🌙'],    mid:['🪐','⭐','🌌','✨'],  hero:'🧒', props:['🚀','🌍'], sup:['👽','🤖'], sparks:['#4776E6','#8E54E9','#FFD700','#fff']},
-  dinos:     {sky:'sky-dinos',    gnd:'gnd-jungle', skyE:['☀️','🌤️','🦋','🌿'],  mid:['🌴','🌿','🌴','🌿'],  hero:'🧒', props:['🦕','🥚'], sup:['🦖','🦕'], sparks:['#56ab2f','#FFD700','#a8e063','#FFF']},
-  ocean:     {sky:'sky-ocean',    gnd:'gnd-ocean',  skyE:['🐬','🐋','🦈','🐙'],   mid:['🪸','🌊','🪸','🐠'],  hero:'🧒', props:['🧜','🐚'], sup:['🐟','🦀'], sparks:['#43e8d8','#1a6fe0','#FFF','#87CEEB']},
-  superhero: {sky:'sky-superhero',gnd:'gnd-city',   skyE:['⭐','💥','🌙','✨'],    mid:['🏙️','⚡','🏙️','💫'], hero:'🧒', props:['⚡','🦸'], sup:['🦸','🦹'], sparks:['#c0392b','#f7ca18','#FFF','#4776E6']},
-  castle:    {sky:'sky-castle',   gnd:'gnd-stone',  skyE:['🌙','⭐','🌟','🏰'],   mid:['🏰','🌲','🏰','🌲'],  hero:'🧒', props:['⚔️','🐉'], sup:['🧙','🤴'], sparks:['#e0b85a','#7b4f12','#FFF','#9b59b6']},
-  circus:    {sky:'sky-circus',   gnd:'gnd-sand',   skyE:['🌟','✨','🎪','⭐'],    mid:['🎪','🎡','🎪','🎠'],  hero:'🧒', props:['🎩','🎭'], sup:['🤹','🐘'], sparks:['#e52d27','#f7ca18','#FFF','#ff9a9e']},
-  fairies:   {sky:'sky-fairies',  gnd:'gnd-pink',   skyE:['🌸','✨','🌺','💫'],    mid:['🌺','🌸','🌷','🌻'],  hero:'🧒', props:['🧚','🌈'], sup:['🦋','🐝'], sparks:['#ff9a9e','#fad0c4','#DA22FF','#FFF']},
-  forest:    {sky:'sky-forest',   gnd:'gnd-moss',   skyE:['🌙','🍄','✨','🦋'],    mid:['🌲','🍄','🌳','🌿'],  hero:'🧒', props:['🍄','🔮'], sup:['🦊','🦉'], sparks:['#71b280','#134e5e','#FFD700','#FFF']},
-  pirates:   {sky:'sky-pirates',  gnd:'gnd-deck',   skyE:['🌊','⭐','🌙','🦜'],    mid:['⚓','🌊','🌊','🌊'],  hero:'🧒', props:['🗺️','💰'],sup:['🦜','🐙'], sparks:['#4286f4','#FFD700','#FFF','#373b44']},
-  games:     {sky:'sky-games',    gnd:'gnd-pixel',  skyE:['⭐','💎','🌟','✨'],    mid:['🕹️','⭐','💎','🌟'],  hero:'🧒', props:['🎮','👾'], sup:['👾','🤖'], sparks:['#6a11cb','#2575fc','#FFD700','#FFF']},
-  safari:    {sky:'sky-safari',   gnd:'gnd-savanna',skyE:['☀️','🌤️','🦅','☀️'],  mid:['🌴','🌾','🌴','🌾'],  hero:'🧒', props:['🦒','🐘'], sup:['🦁','🦓'], sparks:['#f4a623','#e8804a','#FFD700','#FFF']},
-  seasons:   {sky:'sky-seasons',  gnd:'gnd-snow',   skyE:['❄️','⛄','🌨️','✨'],   mid:['🌲','⛄','🌲','❄️'],  hero:'🧒', props:['❄️','🌈'],sup:['🦊','🐿️'],sparks:['#89f7fe','#66a6ff','#FFF','#b8ecff']},
+async function generateImage(theme, pageIdx) {
+  const prompts = IMG_PROMPTS[theme] || IMG_PROMPTS.adventure;
+  const prompt = (prompts[Math.min(pageIdx, prompts.length-1)] || prompts[0])
+    + ', children storybook illustration, no text, watercolour style, warm colours, beautiful, safe for children, high quality, detailed';
+  try {
+    const encoded = encodeURIComponent(prompt);
+    const seed = Math.floor(Math.random() * 999999);
+    const url = `https://image.pollinations.ai/prompt/${encoded}?width=768&height=432&seed=${seed}&nologo=true&enhance=true&model=flux`;
+    // Test the URL is reachable
+    const res = await fetch(url, { method: 'GET' });
+    if (!res.ok) return null;
+    const blob = await res.blob();
+    if (blob.size < 1000) return null;
+    return URL.createObjectURL(blob);
+  } catch { return null; }
+}
 };
 
 function buildScene(theme, pageType) {
@@ -384,18 +379,24 @@ function parseStory(raw) {
     const pM = line.match(/^PAGE\s*\d+\s*:/i);
     if (pM) { if (cur !== null) pages.push(cur.trim()); cur = ''; continue; }
     if (cur !== null) cur += line + '\n';
-  }
-  if (cur?.trim()) pages.push(cur.trim());
-  return { title, pages };
-}
-
-function renderBook(storyData, theme, name, imgUrls) {
-  document.getElementById('bookTitle').textContent = storyData.title;
+  <div id="pages"></div>
+  <div class="donate-banner">
+    <p>✨ This app is <strong>completely free</strong> for every child in the world.<br/>If it brought a smile to your little one's face, a small donation keeps the magic going 🌙</p>
+    <a href="https://buymeacoffee.com" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+  </div>
+  <div class="book-controls">
+    <a href="https://buymeacoffee.com/moldox" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+    <button class="btn-c" onclick="copyBook()">📋 Copy</button>
+    <button class="btn-c" onclick="backSetup()">⚙️ Settings</button>
+  </div>
   document.getElementById('bookSub').textContent = 'A magical story for ' + name + ' ✨';
   const container = document.getElementById('pages');
-  container.innerHTML = '';
-  storyData.pages.forEach((text, i) => {
-    const isTitle = i === 0;
+<div class="footer">
+  Made with ❤️ for children everywhere · Sweet dreams 🌙<br/>
+<div class="footer">
+  Made with ❤️ for children everywhere · Sweet dreams 🌙<br/>
+  <a href="https://buymeacoffee.com/moldox" target="_blank" rel="noopener" style="color:#ff6b6b;">☕ Support this project</a>
+</div>
     const isEnd   = i === storyData.pages.length - 1;
     const pType   = isTitle ? 'title' : isEnd ? 'end' : 'story';
     const page = document.createElement('div');
