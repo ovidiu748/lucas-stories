@@ -119,20 +119,36 @@ const MOOD_MAP = {
   calm:'calm, warm and soothing — perfect for drifting to sleep',magical:'full of wonder, sparkles and magical surprises',
 };
 
-function buildPrompt(name, theme, mood, length) {
+// ── LANGUAGE CONFIG ──
+const LANG_MAP = {
+  en: { name:'English',    locale:'en-GB', instruction:'Write the entire story in English.' },
+  fr: { name:'French',     locale:'fr-FR', instruction:'Écris toute l\'histoire en français. Utilise un langage simple et doux pour les enfants de 5 ans.' },
+  es: { name:'Spanish',    locale:'es-ES', instruction:'Escribe toda la historia en español. Usa un lenguaje simple y cariñoso para niños de 5 años.' },
+  pt: { name:'Portuguese', locale:'pt-BR', instruction:'Escreva toda a história em português. Use linguagem simples e carinhosa para crianças de 5 anos.' },
+  de: { name:'German',     locale:'de-DE', instruction:'Schreibe die ganze Geschichte auf Deutsch. Benutze eine einfache, liebevolle Sprache für 5-jährige Kinder.' },
+  it: { name:'Italian',    locale:'it-IT', instruction:'Scrivi tutta la storia in italiano. Usa un linguaggio semplice e affettuoso per bambini di 5 anni.' },
+  nl: { name:'Dutch',      locale:'nl-NL', instruction:'Schrijf het hele verhaal in het Nederlands. Gebruik eenvoudige, liefdevolle taal voor kinderen van 5 jaar.' },
+  pl: { name:'Polish',     locale:'pl-PL', instruction:'Napisz całą historię po polsku. Używaj prostego i czułego języka dla dzieci w wieku 5 lat.' },
+  ar: { name:'Arabic',     locale:'ar-SA', instruction:'اكتب القصة كاملة باللغة العربية. استخدم لغة بسيطة وحنونة مناسبة للأطفال في سن الخامسة.' },
+  zh: { name:'Chinese',    locale:'zh-CN', instruction:'用中文写整个故事。请使用适合5岁儿童的简单温柔语言。' },
+};
+
+function buildPrompt(name, theme, mood, length, lang) {
   const pages = length === 'long' ? 5 : 3;
   const wpg = length === 'long' ? 75 : 95;
   let mid = '';
   for (let i=2; i<pages; i++) mid += 'PAGE '+i+':\n[story continues ~'+wpg+' words]\n\n';
-  return 'Write a beautiful bedtime storybook for a 5-year-old named '+name+'.\nTheme: '+(THEME_MAP[theme]||theme)+'\nMood: '+(MOOD_MAP[mood]||mood)+'\nPages: exactly '+pages+'\n\nFORMAT:\nTITLE: [title]\n\nPAGE 1:\n[opening ~'+wpg+' words]\n\n'+mid+'PAGE '+pages+':\n[peaceful ending, '+name+' drifts to sleep ~'+wpg+' words]\n\nRules: '+name+' is the hero. Simple language for age 5. No scary content. Each PAGE is one paragraph. Make '+name+' feel loved.';
+  const langInstr = (LANG_MAP[lang] || LANG_MAP.en).instruction;
+  return langInstr+'\n\nWrite a beautiful bedtime storybook for a 5-year-old named '+name+'.\nTheme: '+(THEME_MAP[theme]||theme)+'\nMood: '+(MOOD_MAP[mood]||mood)+'\nPages: exactly '+pages+'\n\nFORMAT:\nTITLE: [title]\n\nPAGE 1:\n[opening ~'+wpg+' words]\n\n'+mid+'PAGE '+pages+':\n[peaceful ending, '+name+' drifts to sleep ~'+wpg+' words]\n\nRules: '+name+' is the hero. Simple language for age 5. No scary content. Each PAGE is one paragraph. Make '+name+' feel loved.';
 }
 
-function buildContinuationPrompt(name, theme, mood, length, prevEntry) {
+function buildContinuationPrompt(name, theme, mood, length, prevEntry, lang) {
   const pages = length === 'long' ? 5 : 3;
   const wpg = length === 'long' ? 75 : 95;
   let mid = '';
   for (let i=2; i<pages; i++) mid += 'PAGE '+i+':\n[story continues ~'+wpg+' words]\n\n';
-  return 'Write a CONTINUATION bedtime storybook for a 5-year-old named '+name+'.\n\nPREVIOUS STORY ENDED:\n"'+prevEntry.lastPage.slice(0,300)+'"\n\nThis is Episode '+(getJournal().length+1)+' continuing that adventure.\nTheme: '+theme+'\nMood: '+(MOOD_MAP[mood]||mood)+'\nPages: exactly '+pages+'\n\nFORMAT:\nTITLE: [new episode title]\n\nPAGE 1:\n[1 sentence warm recap, then new adventure ~'+wpg+' words]\n\n'+mid+'PAGE '+pages+':\n[peaceful ending, '+name+' drifts to sleep, hint at next adventure ~'+wpg+' words]\n\nRules: Reference characters from before. Simple language for age 5. No scary content. End with gentle cliffhanger hint for tomorrow.';
+  const langInstr = (LANG_MAP[lang] || LANG_MAP.en).instruction;
+  return langInstr+'\n\nWrite a CONTINUATION bedtime storybook for a 5-year-old named '+name+'.\n\nPREVIOUS STORY ENDED:\n"'+prevEntry.lastPage.slice(0,300)+'"\n\nThis is Episode '+(getJournal().length+1)+' continuing that adventure.\nTheme: '+theme+'\nMood: '+(MOOD_MAP[mood]||mood)+'\nPages: exactly '+pages+'\n\nFORMAT:\nTITLE: [new episode title]\n\nPAGE 1:\n[1 sentence warm recap, then new adventure ~'+wpg+' words]\n\n'+mid+'PAGE '+pages+':\n[peaceful ending, '+name+' drifts to sleep, hint at next adventure ~'+wpg+' words]\n\nRules: Reference characters from before. Simple language for age 5. No scary content. End with gentle cliffhanger hint for tomorrow.';
 }
 
 function parseStory(raw) {
@@ -193,13 +209,15 @@ function setProgress(pct) { document.getElementById('progFill').style.width = pc
 let lastStory = null;
 let lastTheme = 'football';
 let lastName = 'Lucas';
+let lastLang = 'en';
 
 async function generate(isContinuation) {
   const name = document.getElementById('heroName').value.trim().replace(/[^a-zA-Z\s'-]/g,'').trim() || 'Lucas';
   const theme = sel('theme') || 'football';
   const mood = sel('mood') || 'exciting';
   const len = sel('len') || 'short';
-  lastName = name; lastTheme = theme;
+  const lang = sel('lang') || 'en';
+  lastName = name; lastTheme = theme; lastLang = lang;
   const warn = document.getElementById('warn');
   warn.className = 'warning'; warn.style = '';
   document.getElementById('setupScreen').style.display = 'none';
@@ -213,7 +231,7 @@ async function generate(isContinuation) {
     document.getElementById('loadTitle').textContent = continueEntry ? '✨ Continuing the adventure...' : '✍️ Writing the story...';
     document.getElementById('loadSub').innerHTML = 'The story fairies are weaving magic! ✨';
     setProgress(15);
-    const prompt = continueEntry ? buildContinuationPrompt(name, theme, mood, len, continueEntry) : buildPrompt(name, theme, mood, len);
+    const prompt = continueEntry ? buildContinuationPrompt(name, theme, mood, len, continueEntry, lang) : buildPrompt(name, theme, mood, len, lang);
     const res = await fetch('/api/story', {
       method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
@@ -276,7 +294,12 @@ function readBook() {
   window.speechSynthesis.cancel();
   const utt = new SpeechSynthesisUtterance(lastStory.title + '. ' + lastStory.pages.join(' ... '));
   utt.rate = .82; utt.pitch = 1.05; utt.volume = 1;
-  const pref = window.speechSynthesis.getVoices().find(v => v.name.includes('Google UK') || v.name.includes('Daniel') || v.lang==='en-GB');
+  const langConf = LANG_MAP[lastLang] || LANG_MAP.en;
+  utt.lang = langConf.locale;
+  const voices = window.speechSynthesis.getVoices();
+  const pref = voices.find(v => v.lang.startsWith(langConf.locale.split('-')[0]) && v.name.includes('Google'))
+            || voices.find(v => v.lang.startsWith(langConf.locale.split('-')[0]))
+            || voices.find(v => v.name.includes('Google UK') || v.name.includes('Daniel') || v.lang==='en-GB');
   if (pref) utt.voice = pref;
   window.speechSynthesis.speak(utt);
 }
