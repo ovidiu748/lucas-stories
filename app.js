@@ -131,6 +131,7 @@ const LANG_MAP = {
   pl: { name:'Polish',     locale:'pl-PL', instruction:'Napisz całą historię po polsku. Używaj prostego i czułego języka dla dzieci w wieku 5 lat.' },
   ar: { name:'Arabic',     locale:'ar-SA', instruction:'اكتب القصة كاملة باللغة العربية. استخدم لغة بسيطة وحنونة مناسبة للأطفال في سن الخامسة.' },
   zh: { name:'Chinese',    locale:'zh-CN', instruction:'用中文写整个故事。请使用适合5岁儿童的简单温柔语言。' },
+  ro: { name:'Romanian',   locale:'ro-RO', instruction:'Scrie întreaga poveste în limba română. Folosește un limbaj simplu și duios, potrivit pentru copii de 5 ani.' },
 };
 
 function buildPrompt(name, theme, mood, length, lang) {
