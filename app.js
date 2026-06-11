@@ -13,6 +13,12 @@ const sel = g => { const e = document.querySelector('.pill[data-group="' + g + '
 // ── SCENES ──
 const SCENES = {
   football:  {sky:'sky-football', gnd:'gnd-green',  skyE:['☀️','⛅','🌤️','☁️'],  mid:['🌳','🌲','🌳','🌲'], hero:'🧒', props:['⚽','🥅'], sup:['🧑','👦'], sparks:['#FFD700','#FFF','#38ef7d','#87CEEB']},
+  trains:    {sky:'sky-adventure',gnd:'gnd-green',  skyE:['🌤️','☁️','🌈','⭐'],  mid:['🌳','🏔️','🌲','🌉'], hero:'🧒', props:['🚂','🎫'], sup:['🚃','🧑'], sparks:['#FF6B35','#FFD700','#FFF','#87CEEB']},
+  unicorns:  {sky:'sky-fairies',  gnd:'gnd-pink',   skyE:['🌈','✨','💫','🌸'],  mid:['🌈','🌺','🌷','💐'], hero:'🧒', props:['🦄','🌈'], sup:['🧚','🦋'], sparks:['#ff9a9e','#DA22FF','#FFD700','#FFF']},
+  cooking:   {sky:'sky-circus',   gnd:'gnd-sand',   skyE:['✨','⭐','🌟','💫'],  mid:['🍰','🌟','🎂','✨'], hero:'🧒', props:['🍳','👨🍳'], sup:['🧑🍳','🐱'], sparks:['#f7ca18','#FF6B35','#FFF','#38ef7d']},
+  ballet:    {sky:'sky-fairies',  gnd:'gnd-pink',   skyE:['✨','🌟','💫','🌸'],  mid:['🎭','✨','🌷','⭐'], hero:'🧒', props:['🩰','🌹'], sup:['🧚','🦢'], sparks:['#ff9a9e','#fad0c4','#FFF','#DA22FF']},
+  robots:    {sky:'sky-games',    gnd:'gnd-pixel',  skyE:['⭐','💡','🌟','✨'],  mid:['🤖','💡','⚙️','🔧'], hero:'🧒', props:['🤖','⚙️'], sup:['🦾','🛸'], sparks:['#4776E6','#00FF88','#FFD700','#FFF']},
+  jungle:    {sky:'sky-dinos',    gnd:'gnd-jungle', skyE:['🌤️','🦋','🌿','🌺'], mid:['🌴','🌿','🌳','🍃'], hero:'🧒', props:['🌺','🦜'], sup:['🐒','🦜'], sparks:['#56ab2f','#a8e063','#FFD700','#FFF']},
   rugby:     {sky:'sky-rugby',    gnd:'gnd-green',  skyE:['⛅','☀️','🌈','🌤️'],  mid:['🌿','🌳','🌿','🌳'], hero:'🧒', props:['🏉','🏆'], sup:['🧑','👦'], sparks:['#FFD700','#FFA500','#FFF','#a8e063']},
   books:     {sky:'sky-books',    gnd:'gnd-dark',   skyE:['🌙','⭐','💫','✨'],   mid:['📚','🕯️','📚','🪄'], hero:'🧒', props:['📖','✨'], sup:['🦉','🐱'], sparks:['#DA22FF','#9733EE','#FFD700','#fff']},
   adventure: {sky:'sky-adventure',gnd:'gnd-jungle', skyE:['🌅','🦋','🌟','🌸'],  mid:['🌳','🌴','🌳','🌴'], hero:'🧒', props:['🗺️','💎'], sup:['🦊','🐰'], sparks:['#f953c6','#FFD700','#38ef7d','#FFF']},
@@ -71,6 +77,12 @@ const IMG_PROMPTS = {
   games:    ['cute child jumping into magical video game world colourful pixels storybook','child hero collecting golden coins friendly game characters magical illustration','brave child defeating silly game boss with kindness sparkles storybook','child sleeping cosy bed magical game world glowing screen moonlight'],
   safari:   ['cute child riding friendly giraffe sunny golden savanna storybook watercolour','child meeting smiling lion family waterhole magical africa illustration','brave child helping friendly elephant baby magical savanna sparkles storybook','child sleeping under acacia tree moonlight friendly animals gathered illustration'],
   seasons:  ['cute child playing in magical sparkling snow friendly snowman winter storybook','child discovering spring fairy garden flowers blooming magical illustration','brave child surfing golden autumn leaves friendly squirrels storybook','child sleeping cosy fireplace winter moonlight snowflakes falling soft illustration'],
+  trains:   ['cute child waving from magical steam train colourful countryside storybook','child exploring mountain tunnels on magical rainbow train adventure illustration','brave child conductor discovering hidden treasure at secret station storybook','child sleeping cosy train cabin moonlight passing stars soft illustration'],
+  unicorns: ['cute child riding magical unicorn rainbow meadow sparkles storybook watercolour','child and unicorn friend flying over rainbow waterfall magical kingdom illustration','brave child and unicorn finding enchanted crystal caves sparkles storybook','child sleeping cuddled fluffy unicorn moonlight rainbow glow soft illustration'],
+  cooking:  ['cute child in magical kitchen making rainbow cupcakes sparkles storybook','child discovering enchanted cookbook magical ingredients come to life illustration','brave child chef winning magical baking contest with friendly animals storybook','child sleeping dreaming of magical sweet treats moonlight kitchen cosy illustration'],
+  ballet:   ['cute child in tutu dancing on magical stage sparkling lights storybook','child performing beautiful ballet with friendly fairy audience magical theatre illustration','brave child dancer finding enchanted ballet shoes sparkles dance show storybook','child sleeping in ballet shoes dreaming of dancing moonlight soft illustration'],
+  robots:   ['cute child building friendly robot magical workshop sparkling lights storybook','child and robot friend exploring magical technology city adventure illustration','brave child and robot solving mystery with kindness sparkles storybook','child sleeping cuddled glowing friendly robot moonlight soft bedroom illustration'],
+  jungle:   ['cute child swinging with friendly monkeys colourful jungle storybook watercolour','child meeting wise parrot magical waterfall hidden jungle temple illustration','brave child and jungle animal friends discovering golden treasure storybook','child sleeping in cosy jungle treehouse moonlight fireflies glowing soft illustration'],
 };
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -98,6 +110,9 @@ const THEME_MAP = {
   fairies:'fairies and pixies — tiny magical worlds, enchanted gardens, rainbow dust',forest:'enchanted forest — talking animals, woodland spirits, magical mushroom villages',
   pirates:'friendly pirates — treasure maps, sailing ships, discovering magical islands',games:'jumping inside a magical video game — collecting coins, defeating silly villains',
   safari:'African safari — friendly lions, giraffes and elephants on the golden savanna',seasons:'seasons and nature — magical snow days, spring flowers, autumn leaves',
+  trains:'magical steam trains — racing through tunnels, mountains and secret stations',unicorns:'unicorns and rainbows — magical meadows, sparkles and enchanted crystals',
+  cooking:'magical cooking — enchanted recipes, friendly animals, and delicious adventures',ballet:'ballet and dance — magical stages, sparkling tutus, and graceful fairies',
+  robots:'friendly robots — magical inventions, glowing cities, and clever little helpers',jungle:'wild jungle adventure — friendly monkeys, colourful parrots, hidden temples',
 };
 const MOOD_MAP = {
   exciting:'exciting and action-packed, ending peacefully',funny:'funny and silly with jokes a 5-year-old will love',
@@ -267,6 +282,84 @@ function readBook() {
 }
 function stopReading() { window.speechSynthesis.cancel(); }
 window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+
+// ── SHARE STORY ──
+async function shareStory() {
+  if (!lastStory) return;
+  const title = lastStory.title;
+  const text = '🌙 Tonight\'s bedtime story: "' + title + '" — a magical AI-generated story for ' + lastName + ' ✨\n\nCreate your own free story at: https://lucas-stories.vercel.app';
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: '✨ ' + title, text });
+    } catch(e) { if (e.name !== 'AbortError') fallbackCopyShare(text); }
+  } else {
+    fallbackCopyShare(text);
+  }
+}
+function fallbackCopyShare(text) {
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      const btn = document.querySelector('[onclick="shareStory()"]');
+      const orig = btn.textContent;
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => btn.textContent = orig, 2000);
+    })
+    .catch(() => alert('Share this story:\n\nhttps://lucas-stories.vercel.app'));
+}
+
+// ── PRINT / SAVE AS PDF ──
+function printStory() {
+  if (!lastStory) return;
+  const heroName = lastName || 'Our Hero';
+  const storyTitle = lastStory.title;
+  const pages = lastStory.pages;
+  const date = new Date().toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
+
+  const printContent = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>${storyTitle}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Fredoka+One&family=Lora:ital,wght@0,400;1,400&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; background: #fff; color: #1a1a2e; padding: 40px; max-width: 700px; margin: 0 auto; }
+  .print-header { text-align: center; padding: 30px 20px 24px; background: linear-gradient(135deg, #302b63, #0f0c29); color: #fff; border-radius: 18px; margin-bottom: 32px; }
+  .print-header .moon { font-size: 3em; display: block; margin-bottom: 10px; }
+  .print-header h1 { font-family: 'Fredoka One', cursive; font-size: 2em; color: #FFD700; line-height: 1.2; }
+  .print-header p { color: rgba(255,255,255,.65); margin-top: 6px; font-size: .9em; }
+  .print-page { border: 2px solid #e8d9f0; border-radius: 16px; padding: 24px 28px; margin-bottom: 22px; page-break-inside: avoid; }
+  .print-page:first-of-type { background: linear-gradient(135deg, #fdf6ff, #f0e8ff); border-color: #c9a0dc; }
+  .page-label { font-size: .7em; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #9b59b6; margin-bottom: 8px; }
+  .page-text { font-family: 'Lora', serif; font-size: 1.05em; line-height: 1.9; color: #2c2c4a; }
+  .page-text.italic { font-style: italic; color: #5a4a7a; }
+  .print-footer { text-align: center; padding: 20px; color: #9b8ab0; font-size: .8em; margin-top: 12px; border-top: 1px solid #e8d9f0; }
+  @media print {
+    body { padding: 20px; }
+    .print-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .print-page:first-of-type { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="print-header">
+  <span class="moon">🌙</span>
+  <h1>${storyTitle}</h1>
+  <p>A magical bedtime story for ${heroName} · ${date} ✨</p>
+</div>
+${pages.map((p, i) => {
+  const isFirst = i === 0, isLast = i === pages.length - 1;
+  const label = isFirst ? '✨ Once upon a time...' : isLast ? '🌙 The End...' : '📖 Page ' + i;
+  return '<div class="print-page"><div class="page-label">' + label + '</div><div class="page-text' + (isLast ? ' italic' : '') + '">' + p + '</div></div>';
+}).join('')}
+<div class="print-footer">Made with ❤️ by Bedtime Storybook · lucas-stories.vercel.app · Sweet dreams 🌙</div>
+</body></html>`;
+
+  const w = window.open('', '_blank', 'width=750,height=900');
+  w.document.write(printContent);
+  w.document.close();
+  w.onload = () => { w.focus(); w.print(); };
+}
 
 function copyBook() {
   if (!lastStory) return;
