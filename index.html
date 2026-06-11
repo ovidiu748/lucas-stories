@@ -145,7 +145,24 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 #installContent>div{flex:1;}
 #installBtn{padding:9px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,#FFD700,#FFA500);color:#1a1a2e;font-family:'Fredoka One',cursive;font-size:.95em;cursor:pointer;white-space:nowrap;}
 #dismissInstall{padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#718096;cursor:pointer;font-size:1em;}
-.footer{text-align:center;color:#3a4258;font-size:.76em;padding:10px 0 18px;}
+.footer a{color:#ff6b6b;text-decoration:none;}
+/* ── JOURNAL STYLES ── */
+.journal-btn{position:relative;display:inline-flex;align-items:center;gap:6px;}
+#journalBadge{display:none;background:#ee0979;color:#fff;font-size:.65em;font-weight:800;padding:2px 7px;border-radius:20px;vertical-align:middle;}
+#journalScreen{display:none;width:100%;}
+.journal-header{text-align:center;margin-bottom:22px;}
+.journal-header h2{font-family:'Fredoka One',cursive;font-size:1.8em;color:var(--gold);}
+.journal-header p{color:#b0b8d4;font-size:.88em;margin-top:4px;}
+.journal-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,215,0,.15);border-radius:18px;padding:18px 20px;margin-bottom:14px;animation:pageIn .4s ease both;}
+.journal-ep{font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#718096;margin-bottom:6px;}
+.journal-title{font-family:'Fredoka One',cursive;font-size:1.15em;color:var(--gold);margin-bottom:8px;}
+.journal-summary{font-family:'Lora',serif;color:#a0b0d0;font-size:.84em;line-height:1.7;margin-bottom:14px;}
+.journal-actions{display:flex;flex-wrap:wrap;gap:8px;}
+#continueBanner{display:none;background:linear-gradient(135deg,rgba(56,239,125,.12),rgba(71,118,230,.12));border:1px solid rgba(56,239,125,.3);border-radius:16px;padding:16px 20px;margin-bottom:16px;text-align:center;}
+#continueBanner p{color:#b0b8d4;font-size:.86em;margin-bottom:10px;}
+#continueBanner strong{color:#38ef7d;}
+.btn-continue{display:inline-block;padding:11px 24px;background:linear-gradient(135deg,#11998e,#38ef7d);color:#0a2a1a;font-family:'Fredoka One',cursive;font-size:1em;border-radius:50px;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(56,239,125,.35);transition:all .2s;}
+.btn-continue:hover{transform:translateY(-2px);box-shadow:0 7px 20px rgba(56,239,125,.55);}
 .footer a{color:#ff6b6b;text-decoration:none;}
 @media(max-width:500px){.header h1{font-size:1.7em}.card{padding:18px}.pill{font-size:.8em;padding:6px 11px}.page-body{padding:17px 18px}.s-hero{font-size:4.2em}.title-page .s-hero{font-size:5.5em}}
 </style>
@@ -207,7 +224,18 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 <div id="loadScreen">
   <span class="load-moon">🌙</span>
   <div class="load-title" id="loadTitle">Writing the story...</div>
-  <div class="load-sub" id="loadSub">The story fairies are at work! ✨</div>
+    <span class="free-badge">🌍 100% Free · No Account Needed</span>
+    <div style="margin-top:12px;">
+      <button class="btn-c journal-btn" onclick="showJournal()" style="font-size:.82em;padding:7px 16px;">
+        📚 My Story Journal <span id="journalBadge"></span>
+      </button>
+    </div>
+  </div>
+  <!-- Continue Adventure Banner (shown after a story exists) -->
+  <div id="continueBanner">
+    <p>🌙 <strong id="continueTitle"></strong> ended — but the adventure isn't over!</p>
+    <button class="btn-continue" onclick="continueFromJournal()">✨ Continue the Adventure!</button>
+  </div>
   <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
 </div>
 
@@ -285,12 +313,24 @@ function buildScene(theme, pageType) {
   const isEnd = pageType === 'end';
   const skyC = isEnd ? 'sky-night' : s.sky;
   const gndC = isEnd ? 'gnd-night' : s.gnd;
-  const skyE = isEnd ? ['🌙','⭐','💫','🌟'] : s.skyE;
-  const midE = isEnd ? ['🌙','✨','💤','🌟'] : s.mid;
-  const heroE = isEnd ? '🧒💤' : s.hero;
-  const propsE = isEnd ? ['🌙','💤'] : s.props;
-  let h = '<div class="scene ' + skyC + '">';
-  skyE.forEach((e,i) => { h += '<div class="s-sky-obj k'+(i+1)+'">'+e+'</div>'; });
+  <div class="donate-banner">
+    <p>✨ This app is <strong>completely free</strong> for every child in the world.<br/>If it brought a smile to your little one's face, a small donation keeps the magic going 🌙</p>
+    <a href="https://buymeacoffee.com/moldox" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+  </div>
+</div>
+
+<!-- ── JOURNAL SCREEN ── -->
+<div id="journalScreen">
+  <div class="journal-header">
+    <span style="font-size:2.5em">📚</span>
+    <h2>Story Journal</h2>
+    <p>All of your magical adventures ✨</p>
+  </div>
+  <div id="journalList"></div>
+  <div style="text-align:center;margin-top:8px;margin-bottom:28px;">
+    <button class="btn-c" onclick="closeJournal()">← Back to Home</button>
+  </div>
+</div>
   midE.forEach((e,i) => { h += '<div class="s-mid m'+(i+1)+'">'+e+'</div>'; });
   h += '<div class="s-ground ' + gndC + '"></div>';
   propsE.forEach((e,i) => { h += '<div class="s-prop p'+(i+1)+'">'+e+'</div>'; });
@@ -313,7 +353,8 @@ const IMG_PROMPTS = {
   ocean:    ['cute child swimming with friendly dolphins colourful coral reef underwater storybook','child meeting smiling mermaid magical underwater kingdom sparkles illustration','brave child discovering sunken treasure chest friendly fish ocean storybook','child sleeping in cosy seashell moonlight soft waves gentle illustration'],
   superhero:['cute child wearing superhero cape flying over glittering city night storybook','child superhero saving friendly kitten from tall tree magical illustration','brave young superhero defeating silly villain with kindness children storybook','child superhero sleeping cosy bed cape glowing stars moonlight illustration'],
   castle:   ['cute child in shining armour friendly castle courtyard storybook watercolour','child knight befriending small friendly dragon magical castle tower illustration','brave child finding enchanted sword magical kingdom sparkles children storybook','child knight sleeping cosy castle room moonlight soft candles illustration'],
-  circus:   ['cute child in circus tent friendly acrobats colourful lights storybook watercolour','child performing magic trick friendly audience sparkles circus illustration','brave child with friendly elephant magical circus ring confetti storybook','child sleeping in cosy circus caravan moonlight stars twinkling illustration'],
+<script src="stories.js"></script>
+<script>
   fairies:  ['cute child dancing with friendly fairies enchanted flower garden storybook','child discovering tiny fairy village inside mushroom ring magical illustration','brave child and fairy friends finding rainbow treasure magical garden storybook','child sleeping in flower meadow moonlight fairies glowing soft warm illustration'],
   forest:   ['cute child meeting friendly talking fox enchanted forest storybook watercolour','child discovering magical glowing mushroom village forest creatures illustration','brave child and woodland friends solving magical mystery enchanted forest','child sleeping under giant oak tree moonlight forest animals watching soft'],
   pirates:  ['cute child captain sailing friendly pirate ship sunny ocean storybook','child pirate discovering treasure island friendly parrot map illustration','brave child pirate crew finding magical golden treasure chest storybook','child pirate sleeping hammock below deck moonlight waves gentle illustration'],
@@ -349,44 +390,82 @@ const THEME_MAP = {
   dinos:'friendly funny dinosaurs in a prehistoric jungle',
   ocean:'ocean adventures — mermaids, dolphins, colourful coral reefs and underwater kingdoms',
   superhero:'superheroes — flying through the sky, saving the day with kindness and courage',
-  castle:'castles and knights — brave quests, friendly dragons, magical kingdoms',
-  circus:'circus and magic — acrobats, magicians, performing animals and sparkling lights',
-  fairies:'fairies and pixies — tiny magical worlds, enchanted gardens, rainbow dust',
-  forest:'enchanted forest — talking animals, woodland spirits, magical mushroom villages',
-  pirates:'friendly pirates — treasure maps, sailing ships, discovering magical islands',
-  games:'jumping inside a magical video game — collecting coins, defeating silly villains with kindness',
-  safari:'African safari — friendly lions, giraffes and elephants on the golden savanna',
-  seasons:'seasons and nature — magical snow days, spring flowers, autumn leaves and cosy fireplaces',
-};
-const MOOD_MAP = {
-  exciting:'exciting and action-packed, ending peacefully',
-  funny:'funny and silly with jokes a 5-year-old will love',
-  calm:'calm, warm and soothing — perfect for drifting to sleep',
-  magical:'full of wonder, sparkles and magical surprises',
-};
+async function generate() {
+  const name = document.getElementById('heroName').value.trim().replace(/[^a-zA-Z\s'-]/g,'').trim() || 'Lucas';
+  const theme = sel('theme') || 'football';
+  const mood = sel('mood') || 'exciting';
+  const len = sel('len') || 'short';
+  const warn = document.getElementById('warn');
+  warn.className = 'warning';
+  warn.style = '';
+  document.getElementById('setupScreen').style.display = 'none';
+  document.getElementById('bookScreen').classList.remove('show');
+  document.getElementById('loadScreen').classList.add('show');
+  document.getElementById('btnGo').disabled = true;
+  setProgress(5);
 
-function buildPrompt(name, theme, mood, length) {
-  const pages = length === 'long' ? 5 : 3;
-  const wpg = length === 'long' ? 75 : 95;
-  let mid = '';
-  for (let i=2; i<pages; i++) mid += 'PAGE '+i+':\n[story continues ~'+wpg+' words]\n\n';
-  return 'Write a beautiful children\'s bedtime storybook for a 5-year-old child named '+name+'.\nTheme: '+(THEME_MAP[theme]||theme)+'\nMood: '+(MOOD_MAP[mood]||mood)+'\nTotal pages: exactly '+pages+'\n\nFORMAT — follow exactly:\nTITLE: [magical story title]\n\nPAGE 1:\n[opening scene ~'+wpg+' words]\n\n'+mid+'PAGE '+pages+':\n[peaceful ending — '+name+' drifting to sleep ~'+wpg+' words]\n\nRules:\n- '+name+' is the kind brave hero\n- Simple loving language for age 5\n- No scary moments — wholesome, magical, sweet\n- Each PAGE is one complete paragraph\n- Make '+name+' feel truly special and loved\n- NEVER include violence, fear, or adult themes';
-}
+  // Check if continuing a previous adventure
+  const continueEntry = window._continueEntry || null;
+  window._continueEntry = null;
 
-function parseStory(raw) {
-  let title = 'Bedtime Storybook ✨', pages = [], cur = null;
-  for (const line of raw.split('\n')) {
-    const tM = line.match(/^TITLE:\s*(.+)/i);
-    if (tM) { title = tM[1].trim(); continue; }
-    const pM = line.match(/^PAGE\s*\d+\s*:/i);
-    if (pM) { if (cur !== null) pages.push(cur.trim()); cur = ''; continue; }
-    if (cur !== null) cur += line + '\n';
+  try {
+    document.getElementById('loadTitle').textContent = continueEntry ? '✨ Continuing the adventure...' : '✍️ Writing the story...';
+    document.getElementById('loadSub').innerHTML = 'The story fairies are weaving magic!<br/>Just a moment... ✨';
+    setProgress(15);
+
+    const prompt = continueEntry
+      ? buildContinuationPrompt(name, theme, mood, len, continueEntry)
+      : buildPrompt(name, theme, mood, len);
+
+    const res = await fetch('/api/story', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        messages: [
+          {role:'system', content:"You are a magical children's storybook author. Write warm imaginative bedtime stories for young children aged 3-7. Stories must be wholesome, safe, and follow the page format exactly. Never include violence, fear, adult themes, or anything inappropriate for young children."},
+          {role:'user', content: prompt}
+        ],
+        temperature: 0.85,
+        max_tokens: len === 'long' ? 1400 : 900
+      })
+    });
+    if (!res.ok) {
+      const e = await res.json().catch(() => ({}));
+      throw new Error(e.error || 'HTTP ' + res.status);
+    }
+    const data = await res.json();
+    const storyData = parseStory(data.choices[0].message.content.trim());
+    lastStory = storyData;
+    setProgress(40);
+    document.getElementById('loadTitle').textContent = '🎨 Painting the illustrations...';
+    const total = storyData.pages.length;
+    const imgUrls = [];
+    for (let i=0; i<total; i++) {
+      setProgress(Math.round(40 + (i/total)*55));
+      document.getElementById('loadSub').innerHTML = '🖌️ Painting illustration ' + (i+1) + ' of ' + total + '... ✨';
+      imgUrls.push(await generateImage(theme, i));
+    }
+    setProgress(98);
+    renderBook(storyData, theme, name, imgUrls);
+
+    // Save to journal
+    saveToJournal(name, theme, storyData);
+
+    document.getElementById('loadScreen').classList.remove('show');
+    document.getElementById('bookScreen').classList.add('show');
+    document.getElementById('btnGo').disabled = false;
+    setProgress(100);
+    window.scrollTo({top:0, behavior:'smooth'});
+  } catch(err) {
+    document.getElementById('loadScreen').classList.remove('show');
+    document.getElementById('setupScreen').style.display = 'block';
+    document.getElementById('btnGo').disabled = false;
+    setProgress(0);
+    warn.className = 'warning show';
+    warn.innerHTML = '😔 <strong>Oops!</strong> ' + err.message + '<br/><small>Please try again in a moment ✨</small>';
   }
-  if (cur?.trim()) pages.push(cur.trim());
-  return { title, pages };
 }
-
-function renderBook(storyData, theme, name, imgUrls) {
   document.getElementById('bookTitle').textContent = storyData.title;
   document.getElementById('bookSub').textContent = 'A magical story for ' + name + ' ✨';
   const container = document.getElementById('pages');
