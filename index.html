@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
   <meta name="apple-mobile-web-app-title" content="Bedtime Stories"/>
   <link rel="apple-touch-icon" href="icons/icon.svg"/>
-  <meta name="description" content="Free magical AI bedtime storybook for children."/>
+  <meta name="description" content="Free magical AI bedtime storybook for children. A brand new illustrated story every night!"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"/>
 <style>
@@ -34,7 +34,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 .pill{padding:8px 15px;border-radius:50px;border:2px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);color:#d0d8f0;font-size:.85em;font-weight:600;cursor:pointer;transition:all .2s;user-select:none;}
 .pill:hover{border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.11);transform:translateY(-2px);}
 .pill.selected{border-color:transparent;transform:translateY(-2px);}
-.pill[data-value=football].selected{background:linear-gradient(135deg,#11998e,#38ef7d);color:#111;box-shadow:0 4px 14px rgba(56,239,125,.4);}
+.pill[data-value=football].selected{background:linear-gradient(135deg,#11998e,#38ef7d);color:#111;}
 .pill[data-value=rugby].selected{background:linear-gradient(135deg,#f7971e,#ffd200);color:#111;}
 .pill[data-value=books].selected{background:linear-gradient(135deg,#8e2de2,#4a00e0);color:#fff;}
 .pill[data-value=adventure].selected{background:linear-gradient(135deg,#f953c6,#b91d73);color:#fff;}
@@ -106,7 +106,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 .gnd-pixel{background:#1a0535;}.gnd-savanna{background:#b8860b;}.gnd-snow{background:#c8e8f8;}
 .s-sky-obj{position:absolute;font-size:2em;animation:sky-d 6s ease-in-out infinite;}
 .s-sky-obj.k1{top:9%;left:7%;font-size:1.8em;}.s-sky-obj.k2{top:7%;right:9%;animation-delay:1s;font-size:2.2em;}
-.s-sky-obj.k3{top:20%;left:30%;animation-delay:2s;font-size:1.5em;}.s-sky-obj.k4{top:14%;right:28%;animation-delay:.5s;font-size:1.9em;}
+.s-sky-obj.k3{top:20%;left:30%;animation-delay:2s;font-size:1.5em;}.s-sky-obj.k4{top:14%;right:28%;animation-delay:.5s;}
 @keyframes sky-d{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px) translateX(4px)}}
 .s-mid{position:absolute;bottom:56px;font-size:3em;animation:mid-s 4s ease-in-out infinite;}
 .s-mid.m1{left:4%;}.s-mid.m2{left:13%;animation-delay:.6s;font-size:2.5em;}.s-mid.m3{right:4%;animation-delay:.3s;}.s-mid.m4{right:13%;animation-delay:.9s;font-size:2.5em;}
@@ -131,10 +131,14 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 .page-chapter{font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#718096;margin-bottom:9px;}
 .page-text{font-family:'Lora',serif;color:#d8e0f8;font-size:1.06em;line-height:1.92;}
 .page-text.italic{font-style:italic;color:#c4d0f0;}
-.book-controls{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:6px;margin-bottom:28px;}
+.book-controls{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:6px;margin-bottom:16px;}
 .btn-c{padding:10px 20px;border-radius:50px;border:2px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#d0d8f0;font-family:'Nunito',sans-serif;font-weight:700;font-size:.88em;cursor:pointer;transition:all .2s;}
 .btn-c:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4);transform:translateY(-2px);}
 .btn-c.prime{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1a2e;border-color:transparent;box-shadow:0 4px 14px rgba(255,165,0,.35);}
+.donate-banner{text-align:center;margin:8px 0 24px;padding:18px 20px;background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);border-radius:16px;}
+.donate-banner p{color:#b0b8d4;font-size:.86em;line-height:1.6;margin-bottom:12px;}
+.donate-banner a{display:inline-block;padding:11px 26px;background:linear-gradient(135deg,#ff6b6b,#ee0979);color:#fff;font-family:'Fredoka One',cursive;font-size:1em;border-radius:50px;text-decoration:none;box-shadow:0 4px 14px rgba(238,9,121,.4);transition:all .2s;}
+.donate-banner a:hover{transform:translateY(-2px);box-shadow:0 7px 20px rgba(238,9,121,.6);}
 #installBanner{display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:12px 16px;background:linear-gradient(135deg,#302b63,#0f0c29);border-top:1px solid rgba(255,215,0,.3);box-shadow:0 -4px 20px rgba(0,0,0,.4);}
 #installBanner.show{display:block;}
 #installContent{display:flex;align-items:center;gap:12px;max-width:720px;margin:0 auto;}
@@ -142,11 +146,13 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 #installBtn{padding:9px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,#FFD700,#FFA500);color:#1a1a2e;font-family:'Fredoka One',cursive;font-size:.95em;cursor:pointer;white-space:nowrap;}
 #dismissInstall{padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#718096;cursor:pointer;font-size:1em;}
 .footer{text-align:center;color:#3a4258;font-size:.76em;padding:10px 0 18px;}
+.footer a{color:#ff6b6b;text-decoration:none;}
 @media(max-width:500px){.header h1{font-size:1.7em}.card{padding:18px}.pill{font-size:.8em;padding:6px 11px}.page-body{padding:17px 18px}.s-hero{font-size:4.2em}.title-page .s-hero{font-size:5.5em}}
 </style>
 </head>
 <body>
 <div class="wrap">
+
 <div id="setupScreen">
   <div class="header">
     <span class="moon-icon">🌙</span>
@@ -162,7 +168,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
       <input type="text" id="heroName" value="Lucas" placeholder="Your child's name..." maxlength="30"/>
     </div>
     <div class="section-label">🎨 Tonight's Theme</div>
-    <div class="pill-group" id="themePills">
+    <div class="pill-group">
       <button class="pill selected" data-group="theme" data-value="football">⚽ Football</button>
       <button class="pill" data-group="theme" data-value="rugby">🏉 Rugby</button>
       <button class="pill" data-group="theme" data-value="books">📚 Magic Books</button>
@@ -188,12 +194,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
       <button class="pill" data-group="mood" data-value="magical">🔮 Magical</button>
     </div>
     <div class="section-label">📄 Pages</div>
-.btn-c.donate{background:linear-gradient(135deg,#ff6b6b,#ee0979);color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(238,9,121,.35);}
-.btn-c.donate:hover{box-shadow:0 7px 20px rgba(238,9,121,.55);}
-.donate-banner{text-align:center;margin:8px 0 20px;padding:16px 20px;background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);border-radius:16px;}
-.donate-banner p{color:#b0b8d4;font-size:.84em;line-height:1.6;margin-bottom:12px;}
-.donate-banner a{display:inline-block;padding:10px 24px;background:linear-gradient(135deg,#ff6b6b,#ee0979);color:#fff;font-family:'Fredoka One',cursive;font-size:1em;border-radius:50px;text-decoration:none;box-shadow:0 4px 14px rgba(238,9,121,.4);transition:all .2s;}
-.donate-banner a:hover{transform:translateY(-2px);box-shadow:0 7px 20px rgba(238,9,121,.6);}
+    <div class="pill-group">
       <button class="pill selected" data-group="len" data-value="short">🌟 3 pages</button>
       <button class="pill" data-group="len" data-value="long">📖 5 pages</button>
     </div>
@@ -223,9 +224,16 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
     <button class="btn-c" onclick="copyBook()">📋 Copy</button>
     <button class="btn-c" onclick="backSetup()">⚙️ Settings</button>
   </div>
+  <div class="donate-banner">
+    <p>✨ This app is <strong>completely free</strong> for every child in the world.<br/>If it brought a smile to your little one's face, a small donation keeps the magic going 🌙</p>
+    <a href="https://buymeacoffee.com/moldox" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+  </div>
 </div>
 
-<div class="footer">Made with ❤️ for children everywhere · Sweet dreams 🌙</div>
+<div class="footer">
+  Made with ❤️ for children everywhere · Sweet dreams 🌙<br/>
+  <a href="https://buymeacoffee.com/moldox" target="_blank" rel="noopener">☕ Support this project</a>
+</div>
 </div>
 
 <div id="installBanner">
@@ -241,39 +249,46 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 </div>
 
 <script>
-// ── SAFETY: sanitise child name input ──
 document.getElementById('heroName').addEventListener('input', function() {
   this.value = this.value.replace(/[^a-zA-Z\s'-]/g, '').slice(0, 30);
 });
-const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-async function generateImage(theme, pageIdx) {
-  const prompts = IMG_PROMPTS[theme] || IMG_PROMPTS.adventure;
-  const prompt = (prompts[Math.min(pageIdx, prompts.length-1)] || prompts[0])
-    + ', children storybook illustration, no text, watercolour style, warm colours, beautiful, safe for children, high quality, detailed';
-  try {
-    const encoded = encodeURIComponent(prompt);
-    const seed = Math.floor(Math.random() * 999999);
-    const url = `https://image.pollinations.ai/prompt/${encoded}?width=768&height=432&seed=${seed}&nologo=true&enhance=true&model=flux`;
-    // Test the URL is reachable
-    const res = await fetch(url, { method: 'GET' });
-    if (!res.ok) return null;
-    const blob = await res.blob();
-    if (blob.size < 1000) return null;
-    return URL.createObjectURL(blob);
-  } catch { return null; }
-}
+document.querySelectorAll('.pill').forEach(p => {
+  p.addEventListener('click', () => {
+    document.querySelectorAll('.pill[data-group="' + p.dataset.group + '"]').forEach(x => x.classList.remove('selected'));
+    p.classList.add('selected');
+  });
+});
+const sel = g => { const e = document.querySelector('.pill[data-group="' + g + '"].selected'); return e ? e.dataset.value : null; };
+
+const SCENES = {
+  football:  {sky:'sky-football', gnd:'gnd-green',  skyE:['☀️','⛅','🌤️','☁️'],  mid:['🌳','🌲','🌳','🌲'], hero:'🧒', props:['⚽','🥅'], sup:['🧑','👦'], sparks:['#FFD700','#FFF','#38ef7d','#87CEEB']},
+  rugby:     {sky:'sky-rugby',    gnd:'gnd-green',  skyE:['⛅','☀️','🌈','🌤️'],  mid:['🌿','🌳','🌿','🌳'], hero:'🧒', props:['🏉','🏆'], sup:['🧑','👦'], sparks:['#FFD700','#FFA500','#FFF','#a8e063']},
+  books:     {sky:'sky-books',    gnd:'gnd-dark',   skyE:['🌙','⭐','💫','✨'],   mid:['📚','🕯️','📚','🪄'], hero:'🧒', props:['📖','✨'], sup:['🦉','🐱'], sparks:['#DA22FF','#9733EE','#FFD700','#fff']},
+  adventure: {sky:'sky-adventure',gnd:'gnd-jungle', skyE:['🌅','🦋','🌟','🌸'],  mid:['🌳','🌴','🌳','🌴'], hero:'🧒', props:['🗺️','💎'], sup:['🦊','🐰'], sparks:['#f953c6','#FFD700','#38ef7d','#FFF']},
+  space:     {sky:'sky-space',    gnd:'gnd-space',  skyE:['⭐','🌟','💫','🌙'],   mid:['🪐','⭐','🌌','✨'], hero:'🧒', props:['🚀','🌍'], sup:['👽','🤖'], sparks:['#4776E6','#8E54E9','#FFD700','#fff']},
+  dinos:     {sky:'sky-dinos',    gnd:'gnd-jungle', skyE:['☀️','🌤️','🦋','🌿'], mid:['🌴','🌿','🌴','🌿'], hero:'🧒', props:['🦕','🥚'], sup:['🦖','🦕'], sparks:['#56ab2f','#FFD700','#a8e063','#FFF']},
+  ocean:     {sky:'sky-ocean',    gnd:'gnd-ocean',  skyE:['🐬','🐋','🦈','🐙'],  mid:['🪸','🌊','🪸','🐠'], hero:'🧒', props:['🧜','🐚'], sup:['🐟','🦀'], sparks:['#43e8d8','#1a6fe0','#FFF','#87CEEB']},
+  superhero: {sky:'sky-superhero',gnd:'gnd-city',   skyE:['⭐','💥','🌙','✨'],   mid:['🏙️','⚡','🏙️','💫'],hero:'🧒', props:['⚡','🦸'], sup:['🦸','🦹'], sparks:['#c0392b','#f7ca18','#FFF','#4776E6']},
+  castle:    {sky:'sky-castle',   gnd:'gnd-stone',  skyE:['🌙','⭐','🌟','🏰'],  mid:['🏰','🌲','🏰','🌲'], hero:'🧒', props:['⚔️','🐉'], sup:['🧙','🤴'], sparks:['#e0b85a','#7b4f12','#FFF','#9b59b6']},
+  circus:    {sky:'sky-circus',   gnd:'gnd-sand',   skyE:['🌟','✨','🎪','⭐'],   mid:['🎪','🎡','🎪','🎠'], hero:'🧒', props:['🎩','🎭'], sup:['🤹','🐘'], sparks:['#e52d27','#f7ca18','#FFF','#ff9a9e']},
+  fairies:   {sky:'sky-fairies',  gnd:'gnd-pink',   skyE:['🌸','✨','🌺','💫'],   mid:['🌺','🌸','🌷','🌻'], hero:'🧒', props:['🧚','🌈'], sup:['🦋','🐝'], sparks:['#ff9a9e','#fad0c4','#DA22FF','#FFF']},
+  forest:    {sky:'sky-forest',   gnd:'gnd-moss',   skyE:['🌙','🍄','✨','🦋'],   mid:['🌲','🍄','🌳','🌿'], hero:'🧒', props:['🍄','🔮'], sup:['🦊','🦉'], sparks:['#71b280','#134e5e','#FFD700','#FFF']},
+  pirates:   {sky:'sky-pirates',  gnd:'gnd-deck',   skyE:['🌊','⭐','🌙','🦜'],   mid:['⚓','🌊','🌊','🌊'], hero:'🧒', props:['🗺️','💰'],sup:['🦜','🐙'], sparks:['#4286f4','#FFD700','#FFF','#373b44']},
+  games:     {sky:'sky-games',    gnd:'gnd-pixel',  skyE:['⭐','💎','🌟','✨'],   mid:['🕹️','⭐','💎','🌟'], hero:'🧒', props:['🎮','👾'], sup:['👾','🤖'], sparks:['#6a11cb','#2575fc','#FFD700','#FFF']},
+  safari:    {sky:'sky-safari',   gnd:'gnd-savanna',skyE:['☀️','🌤️','🦅','☀️'], mid:['🌴','🌾','🌴','🌾'], hero:'🧒', props:['🦒','🐘'], sup:['🦁','🦓'], sparks:['#f4a623','#e8804a','#FFD700','#FFF']},
+  seasons:   {sky:'sky-seasons',  gnd:'gnd-snow',   skyE:['❄️','⛄','🌨️','✨'],  mid:['🌲','⛄','🌲','❄️'], hero:'🧒', props:['❄️','🌈'],sup:['🦊','🐿️'],sparks:['#89f7fe','#66a6ff','#FFF','#b8ecff']},
 };
 
 function buildScene(theme, pageType) {
   const s = SCENES[theme] || SCENES.adventure;
   const isEnd = pageType === 'end';
-  const skyC  = isEnd ? 'sky-night'  : s.sky;
-  const gndC  = isEnd ? 'gnd-night'  : s.gnd;
-  const skyE  = isEnd ? ['🌙','⭐','💫','🌟'] : s.skyE;
-  const midE  = isEnd ? ['🌙','✨','💤','🌟'] : s.mid;
+  const skyC = isEnd ? 'sky-night' : s.sky;
+  const gndC = isEnd ? 'gnd-night' : s.gnd;
+  const skyE = isEnd ? ['🌙','⭐','💫','🌟'] : s.skyE;
+  const midE = isEnd ? ['🌙','✨','💤','🌟'] : s.mid;
   const heroE = isEnd ? '🧒💤' : s.hero;
-  const propsE= isEnd ? ['🌙','💤'] : s.props;
+  const propsE = isEnd ? ['🌙','💤'] : s.props;
   let h = '<div class="scene ' + skyC + '">';
   skyE.forEach((e,i) => { h += '<div class="s-sky-obj k'+(i+1)+'">'+e+'</div>'; });
   midE.forEach((e,i) => { h += '<div class="s-mid m'+(i+1)+'">'+e+'</div>'; });
@@ -288,7 +303,6 @@ function buildScene(theme, pageType) {
   return h + '</div>';
 }
 
-// ── IMAGE PROMPTS ──
 const IMG_PROMPTS = {
   football: ['cute child playing football sunny green pitch golden light storybook watercolour','child scoring amazing football goal crowd cheering storybook art','brave little football hero with trophy magical stadium storybook','child sleeping dreaming football moonlight soft illustration'],
   rugby:    ['cute child in rugby kit green field sunny storybook watercolour','child scoring rugby try teammates cheering magical field children book art','brave little rugby hero with trophy storybook warm colours','child sleeping dreaming rugby moonlight soft illustration'],
@@ -312,32 +326,20 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function generateImage(theme, pageIdx) {
   const prompts = IMG_PROMPTS[theme] || IMG_PROMPTS.adventure;
-  const prompt = (prompts[Math.min(pageIdx, prompts.length-1)] || prompts[0]) + ', children storybook illustration, no text, watercolour, warm colours, beautiful, safe for children, high quality';
+  const prompt = (prompts[Math.min(pageIdx, prompts.length-1)] || prompts[0])
+    + ', children storybook illustration, no text, watercolour style, warm colours, beautiful, safe for children, high quality, detailed';
   try {
-    const sub = await fetch('https://stablehorde.net/api/v2/generate/async', {
-      method:'POST', headers:{'Content-Type':'application/json','apikey':'0000000000'},
-      body: JSON.stringify({prompt, params:{width:768,height:432,steps:20,n:1,sampler_name:'k_euler'}, models:['stable_diffusion'], nsfw:false, censor_nsfw:true, r2:true, shared:false})
-    });
-    if (!sub.ok) return null;
-    const {id} = await sub.json();
-    if (!id) return null;
-    for (let i=0; i<30; i++) {
-      await sleep(3000);
-      const chk = await fetch('https://stablehorde.net/api/v2/generate/check/'+id);
-      if (!chk.ok) break;
-      const c = await chk.json();
-      if (c.done) {
-        const st = await fetch('https://stablehorde.net/api/v2/generate/status/'+id);
-        if (!st.ok) break;
-        const s = await st.json();
-        return s?.generations?.[0]?.img || null;
-      }
-    }
-    return null;
+    const encoded = encodeURIComponent(prompt);
+    const seed = Math.floor(Math.random() * 999999);
+    const url = 'https://image.pollinations.ai/prompt/' + encoded + '?width=768&height=432&seed=' + seed + '&nologo=true&enhance=true&model=flux';
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const blob = await res.blob();
+    if (blob.size < 1000) return null;
+    return URL.createObjectURL(blob);
   } catch { return null; }
 }
 
-// ── STORY PROMPT ──
 const THEME_MAP = {
   football:'football — goals, teamwork, the beautiful game',
   rugby:'rugby — scrums, tries, being brave on the field',
@@ -365,10 +367,10 @@ const MOOD_MAP = {
 
 function buildPrompt(name, theme, mood, length) {
   const pages = length === 'long' ? 5 : 3;
-  const wpg   = length === 'long' ? 75 : 95;
+  const wpg = length === 'long' ? 75 : 95;
   let mid = '';
   for (let i=2; i<pages; i++) mid += 'PAGE '+i+':\n[story continues ~'+wpg+' words]\n\n';
-  return 'Write a beautiful children\'s bedtime storybook for a 5-year-old child named '+name+'.\nTheme: '+(THEME_MAP[theme]||theme)+'\nMood: '+(MOOD_MAP[mood]||mood)+'\nTotal pages: exactly '+pages+'\n\nFORMAT — follow exactly:\nTITLE: [magical story title]\n\nPAGE 1:\n[opening scene — introduce '+name+' and the world ~'+wpg+' words]\n\n'+mid+'PAGE '+pages+':\n[peaceful ending — '+name+' is cosy, happy, safe and drifting to sleep ~'+wpg+' words]\n\nRules:\n- '+name+' is the kind brave hero throughout\n- Simple warm loving language for age 5\n- No scary moments — wholesome, magical, sweet\n- Each PAGE is a complete paragraph\n- Make '+name+' feel truly special and loved\n- NEVER include violence, fear, or adult themes';
+  return 'Write a beautiful children\'s bedtime storybook for a 5-year-old child named '+name+'.\nTheme: '+(THEME_MAP[theme]||theme)+'\nMood: '+(MOOD_MAP[mood]||mood)+'\nTotal pages: exactly '+pages+'\n\nFORMAT — follow exactly:\nTITLE: [magical story title]\n\nPAGE 1:\n[opening scene ~'+wpg+' words]\n\n'+mid+'PAGE '+pages+':\n[peaceful ending — '+name+' drifting to sleep ~'+wpg+' words]\n\nRules:\n- '+name+' is the kind brave hero\n- Simple loving language for age 5\n- No scary moments — wholesome, magical, sweet\n- Each PAGE is one complete paragraph\n- Make '+name+' feel truly special and loved\n- NEVER include violence, fear, or adult themes';
 }
 
 function parseStory(raw) {
@@ -379,26 +381,20 @@ function parseStory(raw) {
     const pM = line.match(/^PAGE\s*\d+\s*:/i);
     if (pM) { if (cur !== null) pages.push(cur.trim()); cur = ''; continue; }
     if (cur !== null) cur += line + '\n';
-  <div id="pages"></div>
-  <div class="donate-banner">
-    <p>✨ This app is <strong>completely free</strong> for every child in the world.<br/>If it brought a smile to your little one's face, a small donation keeps the magic going 🌙</p>
-    <a href="https://buymeacoffee.com" target="_blank" rel="noopener">☕ Buy me a coffee</a>
-  </div>
-  <div class="book-controls">
-    <a href="https://buymeacoffee.com/moldox" target="_blank" rel="noopener">☕ Buy me a coffee</a>
-    <button class="btn-c" onclick="copyBook()">📋 Copy</button>
-    <button class="btn-c" onclick="backSetup()">⚙️ Settings</button>
-  </div>
+  }
+  if (cur?.trim()) pages.push(cur.trim());
+  return { title, pages };
+}
+
+function renderBook(storyData, theme, name, imgUrls) {
+  document.getElementById('bookTitle').textContent = storyData.title;
   document.getElementById('bookSub').textContent = 'A magical story for ' + name + ' ✨';
   const container = document.getElementById('pages');
-<div class="footer">
-  Made with ❤️ for children everywhere · Sweet dreams 🌙<br/>
-<div class="footer">
-  Made with ❤️ for children everywhere · Sweet dreams 🌙<br/>
-  <a href="https://buymeacoffee.com/moldox" target="_blank" rel="noopener" style="color:#ff6b6b;">☕ Support this project</a>
-</div>
-    const isEnd   = i === storyData.pages.length - 1;
-    const pType   = isTitle ? 'title' : isEnd ? 'end' : 'story';
+  container.innerHTML = '';
+  storyData.pages.forEach((text, i) => {
+    const isTitle = i === 0;
+    const isEnd = i === storyData.pages.length - 1;
+    const pType = isTitle ? 'title' : isEnd ? 'end' : 'story';
     const page = document.createElement('div');
     page.className = 'page ' + (isTitle ? 'title-page' : isEnd ? 'end-page' : 'story-page');
     const illusDiv = document.createElement('div');
@@ -436,12 +432,11 @@ function setProgress(pct) { document.getElementById('progFill').style.width = pc
 let lastStory = null;
 
 async function generate() {
-  const rawName = document.getElementById('heroName').value.trim();
-  const name  = rawName.replace(/[^a-zA-Z\s'-]/g,'').trim() || 'Lucas';
+  const name = document.getElementById('heroName').value.trim().replace(/[^a-zA-Z\s'-]/g,'').trim() || 'Lucas';
   const theme = sel('theme') || 'football';
-  const mood  = sel('mood')  || 'exciting';
-  const len   = sel('len')   || 'short';
-  const warn  = document.getElementById('warn');
+  const mood = sel('mood') || 'exciting';
+  const len = sel('len') || 'short';
+  const warn = document.getElementById('warn');
   warn.className = 'warning';
   document.getElementById('setupScreen').style.display = 'none';
   document.getElementById('bookScreen').classList.remove('show');
@@ -453,14 +448,15 @@ async function generate() {
     document.getElementById('loadSub').innerHTML = 'The story fairies are weaving magic!<br/>Just a moment... ✨';
     setProgress(15);
     const res = await fetch('/api/story', {
-      method:'POST', headers:{'Content-Type':'application/json'},
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        model:'llama-3.3-70b-versatile',
-        messages:[
+        model: 'llama-3.3-70b-versatile',
+        messages: [
           {role:'system', content:"You are a magical children's storybook author. Write warm imaginative bedtime stories for young children aged 3-7. Stories must be wholesome, safe, and follow the page format exactly. Never include violence, fear, adult themes, or anything inappropriate for young children."},
           {role:'user', content: buildPrompt(name, theme, mood, len)}
         ],
-        temperature:0.85,
+        temperature: 0.85,
         max_tokens: len === 'long' ? 1400 : 900
       })
     });
@@ -503,7 +499,6 @@ function backSetup() {
   window.scrollTo({top:0, behavior:'smooth'});
 }
 function newStory() { backSetup(); }
-
 function readBook() {
   if (!lastStory) return;
   window.speechSynthesis.cancel();
@@ -516,18 +511,14 @@ function readBook() {
 }
 function stopReading() { window.speechSynthesis.cancel(); }
 window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
-
 function copyBook() {
   if (!lastStory) return;
   const txt = lastStory.title + '\n\n' + lastStory.pages.map((p,i) => 'Page '+(i+1)+':\n'+p).join('\n\n');
   navigator.clipboard.writeText(txt).then(() => alert('Story copied! 📋')).catch(() => alert('Select text manually to copy.'));
 }
 
-// ── PWA ──
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  });
+  window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(() => {}); });
 }
 let deferredPrompt = null;
 const banner = document.getElementById('installBanner');
