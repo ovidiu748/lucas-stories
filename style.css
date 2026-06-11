@@ -50,6 +50,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 .pill[data-value=pl].selected{background:linear-gradient(135deg,#DC143C,#fff);color:#111;}
 .pill[data-value=ar].selected{background:linear-gradient(135deg,#006C35,#fff);color:#111;}
 .pill[data-value=zh].selected{background:linear-gradient(135deg,#DE2910,#FFDE00);color:#111;}
+.pill[data-value=ro].selected{background:linear-gradient(135deg,#002B7F,#FCD116);color:#111;}
 .pill[data-value=exciting].selected{background:linear-gradient(135deg,#f7971e,#ffd200);color:#111;}
 .pill[data-value=funny].selected{background:linear-gradient(135deg,#fc5c7d,#6a3093);color:#fff;}
 .pill[data-value=calm].selected{background:linear-gradient(135deg,#2193b0,#6dd5ed);color:#111;}
