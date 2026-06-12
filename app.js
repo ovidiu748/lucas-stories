@@ -384,12 +384,72 @@ ${pages.map((p, i) => {
   w.document.close();
   w.onload = () => { w.focus(); w.print(); };
 }
-
 function copyBook() {
   if (!lastStory) return;
   const txt = lastStory.title + '\n\n' + lastStory.pages.map((p,i)=>'Page '+(i+1)+':\n'+p).join('\n\n');
-  navigator.clipboard.writeText(txt).then(()=>alert('Story copied! 📋')).catch(()=>alert('Select text manually to copy.'));
+  navigator.clipboard.writeText(txt).then(()=>alert('Story copied!')).catch(()=>alert('Select text manually to copy.'));
 }
+
+// ── STAR RATING ──
+function rateStory(n) {
+  const stars = document.querySelectorAll('.star');
+  stars.forEach((s, i) => s.classList.toggle('active', i < n));
+  document.getElementById('ratingThanks').style.display = 'block';
+  document.getElementById('starsRow').style.pointerEvents = 'none';
+  // Save rating to localStorage alongside story
+  try {
+    const journal = JSON.parse(localStorage.getItem('bedtime_journal_v1')) || [];
+    if (journal[0]) { journal[0].rating = n; localStorage.setItem('bedtime_journal_v1', JSON.stringify(journal)); }
+  } catch(e) {}
+}
+
+// ── FEEDBACK MODAL ──
+function showFeedback() {
+  document.getElementById('feedbackModal').style.display = 'flex';
+  document.getElementById('feedbackSent').style.display = 'none';
+  document.getElementById('feedbackText').value = '';
+  document.getElementById('feedbackEmail').value = '';
+}
+function closeFeedback() {
+  document.getElementById('feedbackModal').style.display = 'none';
+}
+async function submitFeedback() {
+  const type = document.getElementById('feedbackType').value;
+  const text = document.getElementById('feedbackText').value.trim();
+  const email = document.getElementById('feedbackEmail').value.trim();
+  const story = lastStory ? lastStory.title : 'No story yet';
+  const lang = lastLang || 'en';
+  // Save to localStorage as backup
+  try {
+    const fb = JSON.parse(localStorage.getItem('bedtime_feedback') || '[]');
+    fb.unshift({ date: new Date().toISOString(), type, text, email, story, lang });
+    if (fb.length > 50) fb.pop();
+    localStorage.setItem('bedtime_feedback', JSON.stringify(fb));
+  } catch(e) {}
+  // Send to Formspree
+  try {
+    await fetch('https://formspree.io/f/xjgdpyjv', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type,
+        message: text || '(no message)',
+        email: email || '(not provided)',
+        story,
+        language: lang,
+        _subject: '💬 Lucas Stories feedback: ' + type
+      })
+    });
+  } catch(e) {}
+  // Show thank you
+  document.getElementById('feedbackSent').style.display = 'block';
+  document.querySelector('#feedbackBox .btn-go').style.display = 'none';
+  document.getElementById('feedbackType').style.display = 'none';
+  document.getElementById('feedbackText').style.display = 'none';
+  document.getElementById('feedbackEmail').style.display = 'none';
+  setTimeout(closeFeedback, 2500);
+}
+
 
 // ── PWA ──
 if ('serviceWorker' in navigator) {
