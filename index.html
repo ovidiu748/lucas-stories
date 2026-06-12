@@ -113,7 +113,6 @@
       <div class="book-main-title" id="bookTitle">Bedtime Storybook</div>
       <div class="book-sub" id="bookSub">Tonight's magical adventure ✨</div>
     </div>
-    <div id="pages"></div>
     <div class="book-controls">
       <button class="btn-c prime" onclick="newStory()">📖 New Story</button>
       <button class="btn-c prime" onclick="continueStory()">✨ Continue!</button>
@@ -124,6 +123,19 @@
       <button class="btn-c" onclick="printStory()">🖨️ Print / PDF</button>
       <button class="btn-c" onclick="backSetup()">⚙️ Settings</button>
     </div>
+    <!-- STAR RATING -->
+    <div class="rating-bar" id="ratingBar">
+      <div class="rating-label">✨ How was tonight's story?</div>
+      <div class="stars" id="starsRow">
+        <span class="star" onclick="rateStory(1)">⭐</span>
+        <span class="star" onclick="rateStory(2)">⭐</span>
+        <span class="star" onclick="rateStory(3)">⭐</span>
+        <span class="star" onclick="rateStory(4)">⭐</span>
+        <span class="star" onclick="rateStory(5)">⭐</span>
+      </div>
+      <div class="rating-thanks" id="ratingThanks" style="display:none">💛 Thank you! Sweet dreams 🌙</div>
+    </div>
+    
     <div class="donate-banner">
       <p>✨ This app is <strong>completely free</strong> for every child in the world.<br/>If it brought a smile to your little one's face, a small donation keeps the magic going 🌙</p>
       <a href="https://buymeacoffee.com/moldox" target="_blank" rel="noopener">☕ Buy me a coffee</a>
@@ -142,10 +154,37 @@
       <button class="btn-c" onclick="closeJournal()">← Back to Home</button>
     </div>
   </div>
-
   <div class="footer">
     Made with ❤️ for children everywhere · Sweet dreams 🌙<br/>
     <a href="https://buymeacoffee.com/moldox" target="_blank" rel="noopener">☕ Support this project</a>
+    &nbsp;·&nbsp;
+    <a href="#" onclick="showFeedback(); return false;">💬 Send Feedback</a>
+  </div>
+</div>
+
+<!-- FEEDBACK MODAL -->
+<div id="feedbackModal" style="display:none">
+  <div id="feedbackOverlay" onclick="closeFeedback()"></div>
+  <div id="feedbackBox">
+    <button id="feedbackClose" onclick="closeFeedback()">✕</button>
+    <div style="font-size:2.2em;margin-bottom:8px">💬</div>
+    <h3>Send us your thoughts!</h3>
+    <p>We'd love to know what you and your little one think ✨</p>
+    <select id="feedbackType">
+      <option value="love">💛 We love it!</option>
+      <option value="suggestion">💡 I have a suggestion</option>
+      <option value="bug">🐛 Something isn't working</option>
+      <option value="language">🌍 Language issue</option>
+      <option value="other">💬 Other</option>
+    </select>
+    <textarea id="feedbackText" placeholder="Tell us more... (optional)" rows="4"></textarea>
+    <input type="text" id="feedbackEmail" placeholder="Your email (optional — for a reply)"/>
+    <button class="btn-go" style="font-size:.95em;padding:13px;margin-top:4px" onclick="submitFeedback()">
+      Send Feedback ✨
+    </button>
+    <div id="feedbackSent" style="display:none;text-align:center;padding:20px 0;color:#38ef7d;font-family:'Fredoka One',cursive;font-size:1.1em">
+      💛 Thank you! Your feedback means the world to us 🌙
+    </div>
   </div>
 </div>
 
