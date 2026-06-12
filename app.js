@@ -119,20 +119,20 @@ const MOOD_MAP = {
   calm:'calm, warm and soothing — perfect for drifting to sleep',magical:'full of wonder, sparkles and magical surprises',
 };
 
-// ── LANGUAGE CONFIG ──
 const LANG_MAP = {
-  en: { name:'English',    locale:'en-GB', instruction:'Write the entire story in English.' },
-  fr: { name:'French',     locale:'fr-FR', instruction:'Écris toute l\'histoire en français. Utilise un langage simple et doux pour les enfants de 5 ans.' },
-  es: { name:'Spanish',    locale:'es-ES', instruction:'Escribe toda la historia en español. Usa un lenguaje simple y cariñoso para niños de 5 años.' },
-  pt: { name:'Portuguese', locale:'pt-BR', instruction:'Escreva toda a história em português. Use linguagem simples e carinhosa para crianças de 5 anos.' },
-  de: { name:'German',     locale:'de-DE', instruction:'Schreibe die ganze Geschichte auf Deutsch. Benutze eine einfache, liebevolle Sprache für 5-jährige Kinder.' },
-  it: { name:'Italian',    locale:'it-IT', instruction:'Scrivi tutta la storia in italiano. Usa un linguaggio semplice e affettuoso per bambini di 5 anni.' },
-  nl: { name:'Dutch',      locale:'nl-NL', instruction:'Schrijf het hele verhaal in het Nederlands. Gebruik eenvoudige, liefdevolle taal voor kinderen van 5 jaar.' },
-  pl: { name:'Polish',     locale:'pl-PL', instruction:'Napisz całą historię po polsku. Używaj prostego i czułego języka dla dzieci w wieku 5 lat.' },
-  ar: { name:'Arabic',     locale:'ar-SA', instruction:'اكتب القصة كاملة باللغة العربية. استخدم لغة بسيطة وحنونة مناسبة للأطفال في سن الخامسة.' },
-  zh: { name:'Chinese',    locale:'zh-CN', instruction:'用中文写整个故事。请使用适合5岁儿童的简单温柔语言。' },
-  ro: { name:'Romanian',   locale:'ro-RO', instruction:'Write the entire story in Romanian language (limba romana). Use simple, warm and loving language suitable for a 5 year old child. The story must be completely in Romanian.' },
+  en: { name:'English',    locale:'en-GB', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in ENGLISH ONLY. Every word of the TITLE and every PAGE must be in English. No other language allowed.' },
+  fr: { name:'French',     locale:'fr-FR', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in FRENCH ONLY (langue francaise). Every word of the TITLE and every PAGE must be in French. Use natural, beautiful, poetic French as found in classic French childrens books. No other language allowed.' },
+  es: { name:'Spanish',    locale:'es-ES', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in SPANISH ONLY (idioma espanol). Every word of the TITLE and every PAGE must be in Spanish. Use natural, warm, poetic Spanish as found in classic Spanish childrens books. No other language allowed.' },
+  pt: { name:'Portuguese', locale:'pt-BR', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in BRAZILIAN PORTUGUESE ONLY (lingua portuguesa). Every word of the TITLE and every PAGE must be in Portuguese. Use natural, warm, poetic Portuguese as found in classic Brazilian childrens books. No other language allowed.' },
+  de: { name:'German',     locale:'de-DE', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in GERMAN ONLY (deutsche Sprache). Every word of the TITLE and every PAGE must be in German. Use natural, warm, poetic German as found in classic German childrens books. No other language allowed.' },
+  it: { name:'Italian',    locale:'it-IT', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in ITALIAN ONLY (lingua italiana). Every word of the TITLE and every PAGE must be in Italian. Use natural, warm, poetic Italian as found in classic Italian childrens books. No other language allowed.' },
+  nl: { name:'Dutch',      locale:'nl-NL', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in DUTCH ONLY (Nederlandse taal). Every word of the TITLE and every PAGE must be in Dutch. Use natural, warm, poetic Dutch as found in classic Dutch childrens books. No other language allowed.' },
+  pl: { name:'Polish',     locale:'pl-PL', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in POLISH ONLY (jezyk polski). Every word of the TITLE and every PAGE must be in Polish. Use natural, warm, poetic Polish as found in classic Polish childrens books. No other language allowed.' },
+  ar: { name:'Arabic',     locale:'ar-SA', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in ARABIC ONLY (al-lugha al-arabiyya). Every word of the TITLE and every PAGE must be in Arabic script. Use natural, warm, poetic Modern Standard Arabic suitable for children. No other language allowed.' },
+  zh: { name:'Chinese',    locale:'zh-CN', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in SIMPLIFIED CHINESE ONLY (Zhongwen). Every word of the TITLE and every PAGE must be in Chinese characters. Use natural, warm, poetic Mandarin Chinese as found in classic Chinese childrens books. No other language allowed.' },
+  ro: { name:'Romanian',   locale:'ro-RO', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in ROMANIAN ONLY (limba romana). Every word of the TITLE and every PAGE must be in Romanian. Use natural, warm, poetic Romanian as found in classic Romanian childrens books - not a translation, but authentic Romanian storytelling. No other language allowed.' },
 };
+
 
 function buildPrompt(name, theme, mood, length, lang) {
   const pages = length === 'long' ? 5 : 3;
