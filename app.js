@@ -130,7 +130,7 @@ const LANG_MAP = {
   pl: { name:'Polish',     locale:'pl-PL', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in POLISH ONLY (jezyk polski). Every word of the TITLE and every PAGE must be in Polish. Use natural, warm, poetic Polish as found in classic Polish childrens books. No other language allowed.' },
   ar: { name:'Arabic',     locale:'ar-SA', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in ARABIC ONLY (al-lugha al-arabiyya). Every word of the TITLE and every PAGE must be in Arabic script. Use natural, warm, poetic Modern Standard Arabic suitable for children. No other language allowed.' },
   zh: { name:'Chinese',    locale:'zh-CN', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in SIMPLIFIED CHINESE ONLY (Zhongwen). Every word of the TITLE and every PAGE must be in Chinese characters. Use natural, warm, poetic Mandarin Chinese as found in classic Chinese childrens books. No other language allowed.' },
-  ro: { name:'Romanian',   locale:'ro-RO', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in ROMANIAN ONLY (limba romana). Every word of the TITLE and every PAGE must be in Romanian. Use natural, warm, poetic Romanian as found in classic Romanian childrens books - not a translation, but authentic Romanian storytelling. No other language allowed.' },
+  ro: { name:'Romanian',   locale:'ro-RO', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in ROMANIAN ONLY (limba romana). Every single word — TITLE and all PAGES — must be in Romanian. No English or other language allowed.\n\nROMANIAN GRAMMAR RULES — follow strictly:\n1. PRONOUN CASES: Use correct Romanian relative pronouns — "caruia ii placea" (NOT "care ii placea"), "careia ii apartinea" (NOT "care ii apartinea"). Always match pronoun case to function.\n2. CONJUNCTIONS: NEVER repeat "si" more than once per sentence. Instead vary with: "iar" (to contrast/continue), "in timp ce" (while), "de asemenea" (also), "totodata" (at the same time), "apoi" (then), "insa" (but), "asadar" (so). Use a comma or full stop instead of "si" where possible.\n3. NO COMMA before "si" when joining two parts of the same type.\n4. VERB AGREEMENT: Verbs must agree in person, number and gender with their subject.\n5. STYLE: Write like a beloved Romanian author writing for children — warm, lyrical, flowing. NOT like a translation from English. Use natural Romanian word order and expressions.\n6. AVOID: Repetitive sentence structures, repetitive vocabulary, awkward calques from English.' },
 };
 
 
@@ -238,7 +238,7 @@ async function generate(isContinuation) {
       body: JSON.stringify({
         model:'llama-3.3-70b-versatile',
         messages:[
-          {role:'system', content:"You are a magical children's storybook author. Write warm imaginative bedtime stories for young children aged 3-7. Always follow the exact page format. Never include violence, fear, or adult themes."},
+          {role:'system', content:"You are a magical children's storybook author with native fluency in all world languages. Write warm, imaginative bedtime stories for young children aged 3-7. Always follow the exact page format. Never include violence, fear, or adult themes. When writing in a specific language, you write as a NATIVE author of that language - not a translator. Your grammar, idioms and style are always natural and correct for that language."},
           {role:'user', content: prompt}
         ],
         temperature:0.85, max_tokens: len==='long' ? 1400 : 900
