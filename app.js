@@ -118,20 +118,28 @@ const MOOD_MAP = {
   exciting:'exciting and action-packed, ending peacefully',funny:'funny and silly with jokes a 5-year-old will love',
   calm:'calm, warm and soothing — perfect for drifting to sleep',magical:'full of wonder, sparkles and magical surprises',
 };
-
 const LANG_MAP = {
-  en: { name:'English',    locale:'en-GB', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in ENGLISH ONLY. Every word of the TITLE and every PAGE must be in English. No other language allowed.' },
-  fr: { name:'French',     locale:'fr-FR', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in FRENCH ONLY (langue francaise). Every word of the TITLE and every PAGE must be in French. Use natural, beautiful, poetic French as found in classic French childrens books. No other language allowed.' },
-  es: { name:'Spanish',    locale:'es-ES', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in SPANISH ONLY (idioma espanol). Every word of the TITLE and every PAGE must be in Spanish. Use natural, warm, poetic Spanish as found in classic Spanish childrens books. No other language allowed.' },
-  pt: { name:'Portuguese', locale:'pt-BR', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in BRAZILIAN PORTUGUESE ONLY (lingua portuguesa). Every word of the TITLE and every PAGE must be in Portuguese. Use natural, warm, poetic Portuguese as found in classic Brazilian childrens books. No other language allowed.' },
-  de: { name:'German',     locale:'de-DE', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in GERMAN ONLY (deutsche Sprache). Every word of the TITLE and every PAGE must be in German. Use natural, warm, poetic German as found in classic German childrens books. No other language allowed.' },
-  it: { name:'Italian',    locale:'it-IT', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in ITALIAN ONLY (lingua italiana). Every word of the TITLE and every PAGE must be in Italian. Use natural, warm, poetic Italian as found in classic Italian childrens books. No other language allowed.' },
-  nl: { name:'Dutch',      locale:'nl-NL', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in DUTCH ONLY (Nederlandse taal). Every word of the TITLE and every PAGE must be in Dutch. Use natural, warm, poetic Dutch as found in classic Dutch childrens books. No other language allowed.' },
-  pl: { name:'Polish',     locale:'pl-PL', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in POLISH ONLY (jezyk polski). Every word of the TITLE and every PAGE must be in Polish. Use natural, warm, poetic Polish as found in classic Polish childrens books. No other language allowed.' },
-  ar: { name:'Arabic',     locale:'ar-SA', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in ARABIC ONLY (al-lugha al-arabiyya). Every word of the TITLE and every PAGE must be in Arabic script. Use natural, warm, poetic Modern Standard Arabic suitable for children. No other language allowed.' },
-  zh: { name:'Chinese',    locale:'zh-CN', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in SIMPLIFIED CHINESE ONLY (Zhongwen). Every word of the TITLE and every PAGE must be in Chinese characters. Use natural, warm, poetic Mandarin Chinese as found in classic Chinese childrens books. No other language allowed.' },
-  ro: { name:'Romanian',   locale:'ro-RO', instruction:'CRITICAL INSTRUCTION: You MUST write the ENTIRE story in ROMANIAN ONLY (limba romana). Every single word — TITLE and all PAGES — must be in Romanian. No English or other language allowed.\n\nROMANIAN GRAMMAR RULES — follow strictly:\n1. PRONOUN CASES: Use correct Romanian relative pronouns — "caruia ii placea" (NOT "care ii placea"), "careia ii apartinea" (NOT "care ii apartinea"). Always match pronoun case to function.\n2. CONJUNCTIONS: NEVER repeat "si" more than once per sentence. Instead vary with: "iar" (to contrast/continue), "in timp ce" (while), "de asemenea" (also), "totodata" (at the same time), "apoi" (then), "insa" (but), "asadar" (so). Use a comma or full stop instead of "si" where possible.\n3. NO COMMA before "si" when joining two parts of the same type.\n4. VERB AGREEMENT: Verbs must agree in person, number and gender with their subject.\n5. STYLE: Write like a beloved Romanian author writing for children — warm, lyrical, flowing. NOT like a translation from English. Use natural Romanian word order and expressions.\n6. AVOID: Repetitive sentence structures, repetitive vocabulary, awkward calques from English.' },
+  en: { name:'English', locale:'en-GB', instruction:'You are a beloved British children\'s author writing a bedtime story — NOT translating from another language.\nVOICE: Warm, gentle, lyrical. Short musical sentences. The kind of story a grandparent whispers at bedtime.\nUSE natural English storytelling openings: "Once upon a time...", "One evening...", "Deep in the heart of...", "Not so long ago..."\nTHE HERO is always referred to in the THIRD PERSON (he/she/their name). Never first person.\nAVOID: repetitive sentence structures, stiff or formal phrasing, American idioms (use British English).\nWrite simple enough for a 5-year-old but beautiful enough for a parent to love reading aloud.' },
+
+  fr: { name:'French', locale:'fr-FR', instruction:'Tu es un conteur français bien-aimé qui raconte une histoire du soir — PAS une traduction de l\'anglais.\nVOIX: Chaleureuse, douce, légèrement poétique. Phrases courtes et musicales. Le genre d\'histoire qu\'une grand-mère murmure au coucher.\nUTILISE des formules typiquement françaises: "Il était une fois...", "Par un beau soir d\'été...", "Au fond de la forêt enchantée...", "Et hop!", "Ni une ni deux..."\nLE HÉROS est toujours à la TROISIÈME PERSONNE (il/elle/son prénom). Jamais à la première personne.\nGRAMMAIRE: Accords corrects en genre et en nombre. Subjonctif naturel. Pas de calques de l\'anglais.\nÉVITE: les répétitions, les structures rigides, les expressions artificielles.\nÉcris pour un enfant de 5 ans mais avec la beauté de la littérature jeunesse française.' },
+
+  es: { name:'Spanish', locale:'es-ES', instruction:'Eres un querido cuentacuentos español que narra un cuento de buenas noches — NO una traducción del inglés.\nVOZ: Cálida, tierna, ligeramente poética. Frases cortas y musicales. El tipo de historia que una abuela susurra al acostarse.\nUSA expresiones típicamente españolas: "Érase una vez...", "En un lugar muy lejano...", "Resulta que...", "Y colorín colorado...", "De repente...", "¡Zas!"\nEL HÉROE siempre en TERCERA PERSONA (él/ella/su nombre). Nunca en primera persona.\nGRAMÁTICA: Concordancia correcta de género y número. Uso natural del pretérito indefinido e imperfecto. Sin calcos del inglés.\nEVITA: estructuras repetitivas, frases rígidas o artificiales.\nEscribe para un niño de 5 años pero con la calidez de la literatura infantil española.' },
+
+  pt: { name:'Portuguese', locale:'pt-BR', instruction:'Você é um querido contador de histórias brasileiro narrando uma história de ninar — NÃO uma tradução do inglês.\nVOZ: Calorosa, carinhosa, levemente poética. Frases curtas e musicais. O tipo de história que uma vovó sussurra na hora de dormir.\nUSE expressões tipicamente brasileiras: "Era uma vez...", "Numa noite estrelada...", "De repente...", "E assim foi que...", "Num piscar de olhos...", "Que surpresa!"\nO HERÓI é sempre na TERCEIRA PESSOA (ele/ela/o nome dele). Nunca na primeira pessoa.\nGRAMÁTICA: Concordância correta de gênero e número. Português brasileiro natural, não europeu. Sem calques do inglês.\nEVITE: estruturas repetitivas, frases rígidas ou artificiais.\nEscreva para uma criança de 5 anos mas com a beleza da literatura infantil brasileira.' },
+
+  de: { name:'German', locale:'de-DE', instruction:'Du bist ein geliebter deutscher Geschichtenerzähler, der eine Gutenachtgeschichte erzählt — KEINE Übersetzung aus dem Englischen.\nSTIMME: Warm, sanft, leicht poetisch. Kurze, melodische Sätze. Die Art Geschichte, die eine Oma am Bett flüstert.\nVERWENDE typisch deutsche Erzählformeln: "Es war einmal...", "In einem weit entfernten Land...", "Auf einmal...", "Und schwups!", "Kaum gesagt, schon getan.", "Eines schönen Abends..."\nDER HELD ist immer in der DRITTEN PERSON (er/sie/sein Name). Niemals in der ersten Person.\nGRAMMATIK: Korrekte Deklination und Kasusendungen. Natürlicher Gebrauch von Imperfekt für Erzählungen. Keine Anglizismen.\nVERMEIDE: Wiederholungen, steife oder künstliche Formulierungen.\nSchreibe für ein 5-jähriges Kind, aber mit der Wärme der deutschen Kinderliteratur.' },
+
+  it: { name:'Italian', locale:'it-IT', instruction:'Sei un amato cantastorie italiano che narra una storia della buonanotte — NON una traduzione dall\'inglese.\nVOCE: Calda, tenera, leggermente poetica. Frasi brevi e musicali. Il tipo di storia che una nonna sussurra al momento di dormire.\nUSA espressioni tipicamente italiane: "C\'era una volta...", "In una notte stellata...", "Tutt\'a un tratto...", "E così fu che...", "In un batter d\'occhio...", "Che meraviglia!"\nL\'EROE è sempre alla TERZA PERSONA (lui/lei/il suo nome). Mai alla prima persona.\nGRAMMATICA: Concordanza corretta di genere e numero. Uso naturale dell\'imperfetto e del passato remoto. Nessun calco dall\'inglese.\nEVITA: strutture ripetitive, frasi rigide o artificiali.\nScrivi per un bambino di 5 anni ma con la bellezza della letteratura per l\'infanzia italiana.' },
+
+  nl: { name:'Dutch', locale:'nl-NL', instruction:'Je bent een geliefde Nederlandse verteller die een slaapverhaal vertelt — GEEN vertaling uit het Engels.\nSTEM: Warm, zacht, licht poëtisch. Korte, melodieuze zinnen. Het soort verhaal dat een oma fluistert voor het slapengaan.\nGEBRUIK typisch Nederlandse vertelformules: "Er was eens...", "Op een mooie avond...", "Ineens...", "En zo geschiedde het dat...", "In een oogwenk...", "Wat een verrassing!"\nDE HELD is altijd in de DERDE PERSOON (hij/zij/zijn naam). Nooit in de eerste persoon.\nGRAMMATICA: Correcte de/het-woordgeslacht. Natuurlijk gebruik van de onvoltooid verleden tijd. Geen anglicismen.\nVERMIJD: herhalingen, stijve of kunstmatige formuleringen.\nSchrijf voor een kind van 5 jaar maar met de warmte van de Nederlandse kinderliteratuur.' },
+
+  pl: { name:'Polish', locale:'pl-PL', instruction:'Jesteś ukochanym polskim gawędziarzem opowiadającym bajkę na dobranoc — NIE tłumaczeniem z angielskiego.\nGŁOS: Ciepły, czuły, lekko poetycki. Krótkie, melodyjne zdania. Taki rodzaj historii, którą babcia szepce przed snem.\nUŻYWAJ typowo polskich formuł narracyjnych: "Dawno, dawno temu...", "Pewnego wieczoru...", "Nagle...", "I tak oto...", "W mgnieniu oka...", "O, cudo!"\nBOHATER jest zawsze w TRZECIEJ OSOBIE (on/ona/jego imię). Nigdy w pierwszej osobie.\nGRAMATYKA: Poprawna odmiana przez przypadki. Naturalny aspekt czasownika. Żadnych anglicyzmów.\nUNIKAJ: powtórzeń, sztywnych lub sztucznych sformułowań.\nPisz dla 5-letniego dziecka, ale z pięknem polskiej literatury dziecięcej.' },
+
+  ar: { name:'Arabic', locale:'ar-SA', instruction:'أنت راوٍ عربي محبوب يحكي قصة نوم — وليس مجرد ترجمة من الإنجليزية.\nالصوت: دافئ، حنون، شعري بلطف. جمل قصيرة وموسيقية. نوع القصة التي تهمس بها الجدة عند النوم.\nاستخدم صيغ سرد عربية أصيلة: "كان يا ما كان...", "في ليلة مقمرة...", "وفجأة...", "وهكذا كان...", "في لمح البصر...", "يا له من عجب!"\nالبطل دائماً بضمير الغائب (هو/هي/اسمه). لا تستخدم ضمير المتكلم أبداً.\nالقواعد: مطابقة صحيحة للجنس والعدد. استخدام طبيعي للماضي والمضارع. لا تقليد للأسلوب الإنجليزي.\nتجنب: التكرار، الصياغات الجامدة أو الاصطناعية.\nاكتب لطفل عمره 5 سنوات بجمال أدب الأطفال العربي الكلاسيكي.' },
+
+  ro: { name:'Romanian', locale:'ro-RO', instruction:'INSTRUCTIUNE CRITICA: Scrie INTREAGA poveste EXCLUSIV IN LIMBA ROMANA. Fiecare cuvant - TITLUL si toate PAGINILE - trebuie sa fie in romana. Nicio alta limba nu este permisa.\n\nSTIL SI VOCE:\n- Scrie ca un povestitor roman iubit care spune o poveste de seara unui copil de 5 ani — nu ca un traducator.\n- Foloseste un ton cald, duios, usor poetic, cu ritm lin care adoarme copilul.\n- Constructii tipic romanesti: "Se facea ca...", "Intr-o buna zi...", "Si uite asa...", "Zis si facut.", "Cat ai clipi din ochi..."\n- Personajul principal este intotdeauna la PERSOANA A III-A (el/ea/numele lui). Niciodata la persoana I.\n- Propozitii scurte si melodioase, usor de urmarit de un copil mic.\n\nGRAMATICA ROMANEASCA - respecta strict:\n1. PRONUME RELATIVE: "caruia ii placea" (NU "care ii placea"), "careia ii apartinea" (NU "care ii apartinea").\n2. CONJUNCTII: NU repeta "si" de mai mult de o data pe propozitie. Alterneaza cu: "iar", "in timp ce", "de asemenea", "totodata", "apoi", "insa", "asadar", "ba chiar".\n3. NU pune virgula inainte de "si" cand uneste doua parti de acelasi fel.\n4. ACORD VERBAL: Verbele se acorda in persoana, numar si gen cu subiectul.\n5. EVITA: structuri repetitive, calchieri din engleza, expresii rigide sau artificiale.' },
 };
+
 
 
 function buildPrompt(name, theme, mood, length, lang) {
@@ -419,16 +427,18 @@ async function submitFeedback() {
   const email = document.getElementById('feedbackEmail').value.trim();
   const story = lastStory ? lastStory.title : 'No story yet';
   const lang = lastLang || 'en';
+
   // Save to localStorage as backup
   try {
     const fb = JSON.parse(localStorage.getItem('bedtime_feedback') || '[]');
     fb.unshift({ date: new Date().toISOString(), type, text, email, story, lang });
     if (fb.length > 50) fb.pop();
     localStorage.setItem('bedtime_feedback', JSON.stringify(fb));
-  } catch(e) {}
+  } catch(e) { console.warn('localStorage error:', e); }
+
   // Send to Formspree
   try {
-    await fetch('https://formspree.io/f/xjgdpyjv', {
+    const res = await fetch('https://formspree.io/f/xjgdpyjv', {
       method: 'POST',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -437,10 +447,13 @@ async function submitFeedback() {
         email: email || '(not provided)',
         story,
         language: lang,
-        _subject: '💬 Lucas Stories feedback: ' + type
+        _subject: 'Lucas Stories feedback: ' + type
       })
     });
-  } catch(e) {}
+    const data = await res.json();
+    if (!res.ok) console.warn('Formspree error:', data);
+  } catch(e) { console.warn('Formspree fetch failed:', e); }
+
   // Show thank you
   document.getElementById('feedbackSent').style.display = 'block';
   document.querySelector('#feedbackBox .btn-go').style.display = 'none';
